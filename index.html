@@ -88,6 +88,17 @@ button{font-family:inherit}
 .lp-foot{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);line-height:1.4}
 .lp-foot .btn{padding:6px 10px;font-size:11.5px}
 @media (max-width:640px){#lightPanel{top:auto;bottom:10px;left:10px;right:10px;width:auto}}
+.nav .btn{flex:0 0 auto}
+#viewer{position:fixed;inset:0;z-index:45;background:#121110;color:#f3f1ec}
+#vStage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;cursor:zoom-in}
+#vImg{max-width:94vw;max-height:84vh;transform-origin:center center;user-select:none;-webkit-user-select:none;will-change:transform;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#vTop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));font-size:13px;pointer-events:none}
+#vTop .x{color:#f3f1ec;font-size:30px;pointer-events:auto;padding:4px 8px}
+#vCap{font-family:'Noto Serif KR',serif;opacity:.9}
+#vBtns{position:absolute;right:16px;bottom:18px;display:flex;gap:6px}
+#vBtns .btn{width:44px;height:44px;font-size:20px;padding:0;background:rgba(40,38,35,.75);color:#f3f1ec;border-color:rgba(255,255,255,.2)}
+#vHint{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);font-size:12px;background:rgba(40,38,35,.8);padding:8px 14px;opacity:0;transition:opacity .6s;pointer-events:none;white-space:nowrap}
+#vHint.on{opacity:1}
 #toast{position:fixed;left:50%;top:22px;transform:translate(-50%,-10px);background:var(--ink);color:var(--paper);font-size:12.5px;padding:10px 16px;opacity:0;transition:.3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #copybox{width:100%;height:220px;font:11px/1.5 ui-monospace,monospace;margin-top:8px;display:none}
@@ -146,7 +157,7 @@ button{font-family:inherit}
   <div class="en" id="nEn"></div>
   <div class="specs" id="nSpecs"></div>
   <div class="note" id="nNote"></div>
-  <div class="nav"><button class="btn" id="nPrev">← 이전</button><button class="btn" id="nNext">다음 →</button></div>
+  <div class="nav"><button class="btn" id="nPrev">← 이전</button><button class="btn dark" id="nZoom">확대 보기</button><button class="btn" id="nNext">다음 →</button></div>
 </div>
 
 <aside class="panel drawer" id="dList"><div class="dhead"><h3>작품 목록</h3><button class="x" data-close>×</button></div><div class="grid" id="listGrid"></div></aside>
@@ -154,6 +165,12 @@ button{font-family:inherit}
 <aside class="panel drawer" id="dEx"><div class="dhead"><h3>전시 목록</h3><button class="x" data-close>×</button></div><div class="exlist" id="exBody"></div></aside>
 <aside class="panel drawer" id="dEdit"><div class="dhead"><h3>전시 편집</h3><button class="x" data-close>×</button></div><div id="editBody"></div></aside>
 
+<div id="viewer" hidden>
+  <div id="vStage"><img id="vImg" alt="" draggable="false"></div>
+  <div id="vTop"><span id="vCap"></span><button class="x" id="vClose" aria-label="닫기">×</button></div>
+  <div id="vBtns"><button class="btn" id="vOut" aria-label="축소">−</button><button class="btn" id="vIn" aria-label="확대">+</button></div>
+  <div id="vHint">두 손가락으로 벌려 확대 · 두 번 탭하면 확대/원래대로</div>
+</div>
 <div id="toast"></div>
 <div id="err"></div>
 <input type="file" id="filePick" accept="image/*" hidden>
@@ -369,7 +386,7 @@ function renderIntro(){
 }
 function showIntroLoading(on){ $('#iEnter').disabled=on; $('#iLoad').textContent=on?'전시장을 준비하는 중…':''; }
 $('#iEnter').onclick = () => { $('#intro').classList.add('off'); $('#hud').classList.add('on'); showHint(); canvas.focus(); };
-function showHint(){ const h=$('#hint'); h.textContent = isTouch ? '드래그: 둘러보기 · 바닥 탭: 이동 · 작품 탭: 감상' : '드래그: 둘러보기 · 바닥 클릭: 이동 · 작품 클릭: 감상 · W A S D / 방향키: 걷기'; h.classList.add('on'); setTimeout(()=>h.classList.remove('on'),9000); }
+function showHint(){ const h=$('#hint'); h.textContent = isTouch ? '드래그: 둘러보기 · 바닥 탭: 이동 · 작품 탭: 감상 · 두 손가락: 확대' : '드래그: 둘러보기 · 바닥 클릭: 이동 · 작품 클릭: 감상 · W A S D / 방향키: 걷기'; h.classList.add('on'); setTimeout(()=>h.classList.remove('on'),9000); }
 
 function openDrawer(id){ document.querySelectorAll('.drawer').forEach(d=>d.classList.toggle('open', d.id===id && !d.classList.contains('open'))); }
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.drawer').classList.remove('open'));
@@ -670,7 +687,7 @@ function loadImage(w,url,announce){
       const ar=t.image.width/t.image.height;
       w._h = w._w/ar; w.height_cm = Math.round(w._w/ar*100);
       if (!w.size_fixed) w.size = `${w.width_cm}×${w.height_cm}cm`;
-      sizeWork(w); setFace(w,t); w._thumb=url;
+      sizeWork(w); setFace(w,t); w._thumb=url; w._loaded=url;
       renderList(); res(true);
     }, undefined, ()=>{ if(announce) toast('이미지를 불러오지 못했어요: '+(w.title||'')); res(false); });
   });
@@ -690,9 +707,11 @@ function focusWork(i){
   const c=new THREE.Vector3(w._wall.x,w._cy,w._wall.z);
   const size=Math.max(w._w,w._h*.95), dist=THREE.MathUtils.clamp(size*1.2+.85,1.6,7);
   const pos=clampPos(c.clone().addScaledVector(w._n,dist)); pos.y=EYE;
-  // shift a little left so the info panel doesn't cover the work on wide screens
+  resetZoom();
+  // on narrow portrait screens aim a little lower so the work sits above the info panel
+  const lookY = c.y - ((innerWidth<640 && innerHeight>innerWidth) ? w._h*.28 : 0);
   const dx=c.x-pos.x, dz=c.z-pos.z;
-  animateTo(pos, Math.atan2(-dx,-dz), Math.atan2(c.y-EYE, Math.hypot(dx,dz)));
+  animateTo(pos, Math.atan2(-dx,-dz), Math.atan2(lookY-EYE, Math.hypot(dx,dz)));
   showInfo(i);
 }
 
@@ -715,26 +734,76 @@ function pick(e){
   const hit=ray.intersectObjects(artMeshes.concat(floorMesh?[floorMesh]:[]),false)[0];
   return hit||null;
 }
-let drag=null;
-canvas.addEventListener('pointerdown',e=>{ if(!e.isPrimary) return; drag={x:e.clientX,y:e.clientY,lx:e.clientX,ly:e.clientY,moved:false}; try{canvas.setPointerCapture(e.pointerId);}catch(_){} });
+let drag=null, pinch=null; const touches=new Map();
+const BASE_FOV=camera.fov;
+function resetZoom(){ if(camera.fov!==BASE_FOV){ camera.fov=BASE_FOV; camera.updateProjectionMatrix(); } }
+const pdist=()=>{ const [a,b]=[...touches.values()]; return Math.hypot(a.x-b.x,a.y-b.y)||1; };
+canvas.addEventListener('pointerdown',e=>{
+  touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  try{canvas.setPointerCapture(e.pointerId);}catch(_){}
+  if (touches.size===2){ drag=null; anim=null; pinch={d:pdist(),fov:camera.fov}; return; }
+  if (touches.size===1) drag={x:e.clientX,y:e.clientY,lx:e.clientX,ly:e.clientY,moved:false};
+});
 canvas.addEventListener('pointermove',e=>{
-  if (!e.isPrimary) return;
+  if (touches.has(e.pointerId)) touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if (pinch && touches.size>=2){
+    camera.fov=THREE.MathUtils.clamp(pinch.fov*pinch.d/pdist(),14,BASE_FOV); camera.updateProjectionMatrix(); return;
+  }
   if (drag){
     const dx=e.clientX-drag.lx, dy=e.clientY-drag.ly; drag.lx=e.clientX; drag.ly=e.clientY;
     if (Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>6) drag.moved=true;
-    if (drag.moved){ anim=null; const s=isTouch?.0055:.0042; view.yaw+=dx*s; view.pitch=THREE.MathUtils.clamp(view.pitch+dy*s*.85,-1.05,1.05); }
-  } else if (!isTouch){ const h=pick(e); canvas.style.cursor = h && h.object!==floorMesh ? 'pointer' : 'grab'; }
+    if (drag.moved){ anim=null; const s=(isTouch?.0055:.0042)*camera.fov/BASE_FOV; view.yaw+=dx*s; view.pitch=THREE.MathUtils.clamp(view.pitch+dy*s*.85,-1.05,1.05); }
+  } else if (!isTouch && !touches.size){ const h=pick(e); canvas.style.cursor = h && h.object!==floorMesh ? 'pointer' : 'grab'; }
 });
-canvas.addEventListener('pointerup',e=>{
-  if (!e.isPrimary || !drag) return;
+function endPointer(e,cancel){
+  touches.delete(e.pointerId);
+  if (pinch){ if (touches.size<2) pinch=null; drag=null; return; }
+  if (cancel || !drag) { drag=null; return; }
   const moved=drag.moved; drag=null; if (moved) return;
   const h=pick(e); if(!h) return;
   if (h.object===floorMesh){
     const to=clampPos(new THREE.Vector3(h.point.x,EYE,h.point.z));
-    hideInfo(); animateTo(to,view.yaw,THREE.MathUtils.clamp(view.pitch,-.2,.2));
-  } else focusWork(h.object.userData.i);
-});
-canvas.addEventListener('pointercancel',()=>drag=null);
+    hideInfo(); resetZoom(); animateTo(to,view.yaw,THREE.MathUtils.clamp(view.pitch,-.2,.2));
+  } else {
+    const i=h.object.userData.i;
+    if (i===focusIndex && $('#info').classList.contains('show') && !anim) openViewer(i);   // second tap on the focused work: open the zoom viewer
+    else focusWork(i);
+  }
+}
+canvas.addEventListener('pointerup',e=>endPointer(e,false));
+canvas.addEventListener('pointercancel',e=>endPointer(e,true));
+canvas.addEventListener('dblclick',e=>{ if(camera.fov!==BASE_FOV){ resetZoom(); } });
+
+/* ---------- full-screen zoom viewer ---------- */
+const V={s:1,x:0,y:0,pts:new Map(),pinch:null,pan:null,lastTap:0};
+function vApply(){ $('#vImg').style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`; }
+function vClamp(){ V.s=THREE.MathUtils.clamp(V.s,1,8); const im=$('#vImg'), mx=im.clientWidth*(V.s-1)/2, my=im.clientHeight*(V.s-1)/2; V.x=THREE.MathUtils.clamp(V.x,-mx,mx); V.y=THREE.MathUtils.clamp(V.y,-my,my); }
+function vZoomAt(ns,cx,cy){ const r=$('#vStage').getBoundingClientRect(); const ox=cx-(r.left+r.width/2), oy=cy-(r.top+r.height/2); const k=ns/V.s; V.x=ox-(ox-V.x)*k; V.y=oy-(oy-V.y)*k; V.s=ns; vClamp(); vApply(); }
+function openViewer(i){
+  const w=works[i]; if(!w) return;
+  const src = w._localUrl || (w._loaded ? w._loaded : null) || w._thumb;
+  $('#vImg').src=src; $('#vCap').textContent=[w.title, [w.year,w.medium,sizeText(w)].filter(Boolean).join(' · ')].filter(Boolean).join('  —  ');
+  V.s=1; V.x=0; V.y=0; vApply(); $('#viewer').hidden=false;
+  $('#vHint').classList.add('on'); setTimeout(()=>$('#vHint').classList.remove('on'),3500);
+}
+function closeViewer(){ $('#viewer').hidden=true; }
+$('#vClose').onclick=closeViewer;
+$('#nZoom').onclick=()=>{ if(focusIndex>=0) openViewer(focusIndex); };
+const vs=$('#vStage');
+vs.addEventListener('pointerdown',e=>{ V.pts.set(e.pointerId,{x:e.clientX,y:e.clientY}); try{vs.setPointerCapture(e.pointerId);}catch(_){}
+  if (V.pts.size===2){ const [a,b]=[...V.pts.values()]; V.pinch={d:Math.hypot(a.x-b.x,a.y-b.y)||1,s:V.s}; V.pan=null; }
+  else V.pan={x:e.clientX,y:e.clientY,ox:V.x,oy:V.y,t:performance.now(),moved:false}; });
+vs.addEventListener('pointermove',e=>{ if(!V.pts.has(e.pointerId)) return; V.pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if (V.pinch && V.pts.size>=2){ const [a,b]=[...V.pts.values()]; vZoomAt(V.pinch.s*Math.hypot(a.x-b.x,a.y-b.y)/V.pinch.d,(a.x+b.x)/2,(a.y+b.y)/2); return; }
+  if (V.pan){ const dx=e.clientX-V.pan.x, dy=e.clientY-V.pan.y; if(Math.abs(dx)+Math.abs(dy)>5) V.pan.moved=true; V.x=V.pan.ox+dx; V.y=V.pan.oy+dy; vClamp(); vApply(); } });
+function vEnd(e){ V.pts.delete(e.pointerId); if(V.pts.size<2) V.pinch=null;
+  if (V.pan && !V.pan.moved){ const now=performance.now(); if(now-V.lastTap<320){ vZoomAt(V.s>1.2?1:2.6,e.clientX,e.clientY); V.lastTap=0; } else V.lastTap=now; }
+  if (!V.pts.size) V.pan=null; }
+vs.addEventListener('pointerup',vEnd); vs.addEventListener('pointercancel',vEnd);
+vs.addEventListener('wheel',e=>{ e.preventDefault(); vZoomAt(V.s*Math.exp(-e.deltaY*.0018),e.clientX,e.clientY); },{passive:false});
+$('#vIn').onclick=()=>{ const r=vs.getBoundingClientRect(); vZoomAt(V.s*1.6,r.left+r.width/2,r.top+r.height/2); };
+$('#vOut').onclick=()=>{ const r=vs.getBoundingClientRect(); vZoomAt(V.s/1.6,r.left+r.width/2,r.top+r.height/2); };
+addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#viewer').hidden) closeViewer(); });
 canvas.addEventListener('wheel',e=>{ e.preventDefault(); anim=null; const f=new THREE.Vector3(-Math.sin(view.yaw),0,-Math.cos(view.yaw)); view.pos.addScaledVector(f,-e.deltaY*.0035); clampPos(view.pos); },{passive:false});
 
 let last=performance.now();
