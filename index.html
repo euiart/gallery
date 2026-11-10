@@ -89,16 +89,38 @@ button{font-family:inherit}
 .lp-foot .btn{padding:6px 10px;font-size:11.5px}
 @media (max-width:640px){#lightPanel{top:auto;bottom:10px;left:10px;right:10px;width:auto}}
 .nav .btn{flex:0 0 auto}
-#viewer{position:fixed;inset:0;z-index:45;background:#121110;color:#f3f1ec}
-#vStage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;cursor:zoom-in}
-#vImg{max-width:94vw;max-height:84vh;transform-origin:center center;user-select:none;-webkit-user-select:none;will-change:transform;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-#vTop{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,0));font-size:13px;pointer-events:none}
-#vTop .x{color:#f3f1ec;font-size:30px;pointer-events:auto;padding:4px 8px}
-#vCap{font-family:'Noto Serif KR',serif;opacity:.9}
-#vBtns{position:absolute;right:16px;bottom:18px;display:flex;gap:6px}
-#vBtns .btn{width:44px;height:44px;font-size:20px;padding:0;background:rgba(40,38,35,.75);color:#f3f1ec;border-color:rgba(255,255,255,.2)}
-#vHint{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);font-size:12px;background:rgba(40,38,35,.8);padding:8px 14px;opacity:0;transition:opacity .6s;pointer-events:none;white-space:nowrap}
+#viewer{position:fixed;inset:0;z-index:45;background:#141312;color:#f3f1ec}
+#vStage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;cursor:grab}
+#vStage:active{cursor:grabbing}
+#vImg{max-width:min(92vw,1400px);max-height:calc(100vh - 170px);transform-origin:center center;user-select:none;-webkit-user-select:none;will-change:transform;box-shadow:0 24px 70px rgba(0,0,0,.55)}
+#vTop{position:absolute;top:0;left:0;right:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px 18px;background:linear-gradient(rgba(10,10,9,.8),rgba(10,10,9,0))}
+#vCap{text-align:center;line-height:1.35}
+#vCap b{display:block;font-family:'Noto Serif KR',serif;font-weight:600;font-size:16px;letter-spacing:-.01em}
+#vCap span{font-size:11.5px;color:rgba(243,241,236,.62);letter-spacing:.03em}
+#vCount{justify-self:end;font-size:11px;letter-spacing:.22em;color:rgba(243,241,236,.6);font-variant-numeric:tabular-nums}
+.vbtn{white-space:nowrap;flex:0 0 auto;appearance:none;border:1px solid rgba(255,255,255,.16);background:rgba(36,34,31,.82);color:#f3f1ec;height:42px;min-width:42px;padding:0 12px;font:500 18px/1 'Noto Sans KR';cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .2s}
+.vbtn:hover{background:rgba(70,66,60,.9)}
+.vbtn.txt{font-size:12.5px;letter-spacing:.04em}
+.vbtn.back{justify-self:start;font-size:13px;letter-spacing:.03em;padding:0 14px;display:flex;align-items:center;gap:8px;background:#f3f1ec;color:#1c1b19;border-color:#f3f1ec}
+.vbtn.back:hover{background:#fff}
+#vBar{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;padding:6px;background:rgba(20,19,18,.6);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#vBar .vbtn{border-color:transparent;background:transparent}
+#vBar .vbtn:hover{background:rgba(255,255,255,.1)}
+#vPct{min-width:52px;text-align:center;font-size:12px;color:rgba(243,241,236,.75);font-variant-numeric:tabular-nums}
+.vsep{width:1px;height:22px;background:rgba(255,255,255,.15);margin:0 4px}
+#vHint{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);font-size:12px;background:rgba(40,38,35,.85);padding:8px 14px;opacity:0;transition:opacity .6s;pointer-events:none;white-space:nowrap}
 #vHint.on{opacity:1}
+@media (max-width:640px){
+  #vTop{grid-template-columns:auto 1fr auto;padding:10px 12px;gap:8px}
+  #vCap{text-align:left}
+  #vCap b{font-size:14px} #vCap span{display:none}
+  .vbtn.back{padding:0 11px;font-size:12px}
+  #vImg{max-width:96vw;max-height:calc(100vh - 150px)}
+  #vBar{bottom:14px;gap:2px;padding:4px}
+  #vBar .vbtn{min-width:38px;padding:0 8px}
+  #vPct{min-width:44px;font-size:11px}
+  #vHint{bottom:72px;font-size:11px}
+}
 #toast{position:fixed;left:50%;top:22px;transform:translate(-50%,-10px);background:var(--ink);color:var(--paper);font-size:12.5px;padding:10px 16px;opacity:0;transition:.3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #copybox{width:100%;height:220px;font:11px/1.5 ui-monospace,monospace;margin-top:8px;display:none}
@@ -167,8 +189,21 @@ button{font-family:inherit}
 
 <div id="viewer" hidden>
   <div id="vStage"><img id="vImg" alt="" draggable="false"></div>
-  <div id="vTop"><span id="vCap"></span><button class="x" id="vClose" aria-label="닫기">×</button></div>
-  <div id="vBtns"><button class="btn" id="vOut" aria-label="축소">−</button><button class="btn" id="vIn" aria-label="확대">+</button></div>
+  <div id="vTop">
+    <button class="vbtn back" id="vClose"><span aria-hidden="true">←</span> 전시장으로</button>
+    <div id="vCap"><b id="vTitle"></b><span id="vMeta"></span></div>
+    <span id="vCount"></span>
+  </div>
+  <div id="vBar">
+    <button class="vbtn" id="vPrev" aria-label="이전 작품">‹</button>
+    <span class="vsep"></span>
+    <button class="vbtn" id="vOut" aria-label="축소">−</button>
+    <span id="vPct">100%</span>
+    <button class="vbtn" id="vIn" aria-label="확대">+</button>
+    <button class="vbtn txt" id="vFit">맞추기</button>
+    <span class="vsep"></span>
+    <button class="vbtn" id="vNext" aria-label="다음 작품">›</button>
+  </div>
   <div id="vHint">두 손가락으로 벌려 확대 · 두 번 탭하면 확대/원래대로</div>
 </div>
 <div id="toast"></div>
@@ -776,18 +811,22 @@ canvas.addEventListener('dblclick',e=>{ if(camera.fov!==BASE_FOV){ resetZoom(); 
 
 /* ---------- full-screen zoom viewer ---------- */
 const V={s:1,x:0,y:0,pts:new Map(),pinch:null,pan:null,lastTap:0};
-function vApply(){ $('#vImg').style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`; }
+function vApply(){ $('#vImg').style.transform=`translate(${V.x}px,${V.y}px) scale(${V.s})`; $('#vPct').textContent=Math.round(V.s*100)+'%'; $('#vFit').disabled=V.s===1&&!V.x&&!V.y; }
 function vClamp(){ V.s=THREE.MathUtils.clamp(V.s,1,8); const im=$('#vImg'), mx=im.clientWidth*(V.s-1)/2, my=im.clientHeight*(V.s-1)/2; V.x=THREE.MathUtils.clamp(V.x,-mx,mx); V.y=THREE.MathUtils.clamp(V.y,-my,my); }
 function vZoomAt(ns,cx,cy){ const r=$('#vStage').getBoundingClientRect(); const ox=cx-(r.left+r.width/2), oy=cy-(r.top+r.height/2); const k=ns/V.s; V.x=ox-(ox-V.x)*k; V.y=oy-(oy-V.y)*k; V.s=ns; vClamp(); vApply(); }
 function openViewer(i){
   const w=works[i]; if(!w) return;
   const src = w._localUrl || (w._loaded ? w._loaded : null) || w._thumb;
-  $('#vImg').src=src; $('#vCap').textContent=[w.title, [w.year,w.medium,sizeText(w)].filter(Boolean).join(' · ')].filter(Boolean).join('  —  ');
-  V.s=1; V.x=0; V.y=0; vApply(); $('#viewer').hidden=false;
-  $('#vHint').classList.add('on'); setTimeout(()=>$('#vHint').classList.remove('on'),3500);
+  $('#vImg').src=src; $('#vTitle').textContent=w.title||''; $('#vMeta').textContent=[w.year,w.medium,sizeText(w)].filter(Boolean).join(' · ');
+  $('#vCount').textContent=String(i+1).padStart(2,'0')+' / '+String(works.length).padStart(2,'0');
+  V.s=1; V.x=0; V.y=0; vApply();
+  if ($('#viewer').hidden){ $('#viewer').hidden=false; $('#vHint').classList.add('on'); setTimeout(()=>$('#vHint').classList.remove('on'),3500); }
 }
 function closeViewer(){ $('#viewer').hidden=true; }
 $('#vClose').onclick=closeViewer;
+function vStep(d){ if(!works.length) return; const i=((focusIndex+d)%works.length+works.length)%works.length; focusWork(i); openViewer(i); }
+$('#vPrev').onclick=()=>vStep(-1); $('#vNext').onclick=()=>vStep(1);
+$('#vFit').onclick=()=>{ V.s=1; V.x=0; V.y=0; vApply(); };
 $('#nZoom').onclick=()=>{ if(focusIndex>=0) openViewer(focusIndex); };
 const vs=$('#vStage');
 vs.addEventListener('pointerdown',e=>{ V.pts.set(e.pointerId,{x:e.clientX,y:e.clientY}); try{vs.setPointerCapture(e.pointerId);}catch(_){}
@@ -803,7 +842,7 @@ vs.addEventListener('pointerup',vEnd); vs.addEventListener('pointercancel',vEnd)
 vs.addEventListener('wheel',e=>{ e.preventDefault(); vZoomAt(V.s*Math.exp(-e.deltaY*.0018),e.clientX,e.clientY); },{passive:false});
 $('#vIn').onclick=()=>{ const r=vs.getBoundingClientRect(); vZoomAt(V.s*1.6,r.left+r.width/2,r.top+r.height/2); };
 $('#vOut').onclick=()=>{ const r=vs.getBoundingClientRect(); vZoomAt(V.s/1.6,r.left+r.width/2,r.top+r.height/2); };
-addEventListener('keydown',e=>{ if(e.key==='Escape' && !$('#viewer').hidden) closeViewer(); });
+addEventListener('keydown',e=>{ if($('#viewer').hidden) return; e.stopImmediatePropagation(); if(e.key==='Escape') closeViewer(); else if(e.key==='ArrowLeft') vStep(-1); else if(e.key==='ArrowRight') vStep(1); else if(e.key==='+'||e.key==='=') $('#vIn').click(); else if(e.key==='-') $('#vOut').click(); else if(e.key==='0') $('#vFit').click(); },true);
 canvas.addEventListener('wheel',e=>{ e.preventDefault(); anim=null; const f=new THREE.Vector3(-Math.sin(view.yaw),0,-Math.cos(view.yaw)); view.pos.addScaledVector(f,-e.deltaY*.0035); clampPos(view.pos); },{passive:false});
 
 let last=performance.now();
