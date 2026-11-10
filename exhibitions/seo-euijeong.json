@@ -33,7 +33,8 @@
     "text": "#22201d",
     "gap": 1.5,
     "room_light": 40,
-    "art_light": 20
+    "art_light": 50,
+    "art_linked": false
   },
   "works": [
     {
