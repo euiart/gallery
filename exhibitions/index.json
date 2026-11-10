@@ -1,0 +1,17 @@
+{
+  "default": "seo-euijeong",
+  "exhibitions": [
+    {
+      "id": "seo-euijeong",
+      "label": "서의정 — 관계의 가변성",
+      "desc": "2026 개인전 · 얽힘 연작",
+      "file": "exhibitions/seo-euijeong.json"
+    },
+    {
+      "id": "sample-artist",
+      "label": "예시 작가 — 색의 온도",
+      "desc": "새 작가 전시용 예시",
+      "file": "exhibitions/sample-artist.json"
+    }
+  ]
+}

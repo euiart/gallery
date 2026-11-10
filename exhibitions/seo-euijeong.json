@@ -1,0 +1,287 @@
+{
+  "artist": {
+    "name": "서의정",
+    "name_en": "Seo Eui Jeong",
+    "bio": "한국과 일본에서 활동하며 회화와 일러스트 작업을 하는 작가",
+    "website": "https://www.euiart.com"
+  },
+  "exhibition": {
+    "eyebrow": "Solo Exhibition · Online",
+    "title": "관계의 가변성",
+    "subtitle": "연기(緣起)와 리좀의 회화적 구현",
+    "period": "2026. 11. 21 – 11. 26",
+    "venue": "KMJ 아트 갤러리 2층",
+    "statement": [
+      "파편화되고 고립된 현대 사회에서 개인은 타자와 어떻게 유기적으로 얽혀 존재하는가. 화면 위에 교차하는 무수한 선은 가변적인 관계의 흐름이다.",
+      "리좀이 끊어져도 기존의 선을 따라, 혹은 전혀 새로운 선으로 다시 뻗어 나가듯, 관계 또한 단절에 멈추지 않고 다시 이어지고 도약하며 확장된다.",
+      "고정된 중심 없이 흐르고 연결되고 변화하며 새로이 생성되는 관계의 구조를 회화적 언어로 바라보고자 한다."
+    ]
+  },
+  "space": {
+    "wall": "#f3f2ee",
+    "floor": "#bfbbb3",
+    "floorStyle": "concrete",
+    "text": "#22201d",
+    "gap": 1.5
+  },
+  "works": [
+    {
+      "title": "얽힘 01",
+      "title_en": "Entanglement 01",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/01.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 13,
+        "bg": "#d8d2c4",
+        "square": "#0e0e0e",
+        "lines": "#f7f3ea",
+        "mist": [
+          "#c3b59e",
+          "#8e877b"
+        ],
+        "accents": []
+      }
+    },
+    {
+      "title": "얽힘 02",
+      "title_en": "Entanglement 02",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/02.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 26,
+        "bg": "#1e3e78",
+        "square": "#2650b0",
+        "lines": "#eef1f6",
+        "mist": [
+          "#5d88d8",
+          "#0d1b3a"
+        ],
+        "accents": [
+          "#9cc0f0"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 03",
+      "title_en": "Entanglement 03",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/03.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 39,
+        "bg": "#7b2c2c",
+        "square": "#d8b24a",
+        "lines": "#f3e6d4",
+        "mist": [
+          "#b2493b",
+          "#3d1414"
+        ],
+        "accents": [
+          "#e9c46a"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 04",
+      "title_en": "Entanglement 04",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/04.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 52,
+        "bg": "#2e5c4f",
+        "square": "#ece5d6",
+        "lines": "#f2eee4",
+        "mist": [
+          "#4f8a74",
+          "#14302a"
+        ],
+        "accents": [
+          "#b9d7c4"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 05",
+      "title_en": "Entanglement 05",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/05.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 65,
+        "bg": "#c8773a",
+        "square": "#262626",
+        "lines": "#fbf1e2",
+        "mist": [
+          "#e3a061",
+          "#7a3f17"
+        ],
+        "accents": [
+          "#3b3b3b"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 06",
+      "title_en": "Entanglement 06",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/06.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 78,
+        "bg": "#6b5b8e",
+        "square": "#c43e5b",
+        "lines": "#f1ecf6",
+        "mist": [
+          "#9787bd",
+          "#2f2545"
+        ],
+        "accents": [
+          "#f0a8b8"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 07",
+      "title_en": "Entanglement 07",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/07.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 91,
+        "bg": "#ece6dc",
+        "square": "#c6322c",
+        "lines": "#2a2724",
+        "mist": [
+          "#d7cdbd",
+          "#bfb3a0"
+        ],
+        "accents": [
+          "#c6322c"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 08",
+      "title_en": "Entanglement 08",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/08.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 104,
+        "bg": "#1f3030",
+        "square": "#4db2a4",
+        "lines": "#e6efe9",
+        "mist": [
+          "#2f5a55",
+          "#0d1717"
+        ],
+        "accents": [
+          "#8fd6c8"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 09",
+      "title_en": "Entanglement 09",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/09.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 117,
+        "bg": "#b5c2ce",
+        "square": "#1c2a46",
+        "lines": "#f7f8fa",
+        "mist": [
+          "#d5dee6",
+          "#7f93a8"
+        ],
+        "accents": [
+          "#1c2a46"
+        ]
+      }
+    },
+    {
+      "title": "얽힘 10",
+      "title_en": "Entanglement 10",
+      "year": "2026",
+      "medium": "Mixed media",
+      "width_cm": 120,
+      "height_cm": 120,
+      "size": "120×120cm",
+      "size_fixed": true,
+      "note": "",
+      "image": "images/seo-euijeong/10.jpg",
+      "placeholder": {
+        "style": "entanglement",
+        "seed": 130,
+        "bg": "#383838",
+        "square": "#e8d26a",
+        "lines": "#efece4",
+        "mist": [
+          "#555",
+          "#1d1d1d"
+        ],
+        "accents": [
+          "#e8d26a"
+        ]
+      }
+    }
+  ]
+}
