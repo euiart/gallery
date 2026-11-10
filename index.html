@@ -18,7 +18,7 @@ button{font-family:inherit}
 .hud.on{opacity:1}
 .brand{user-select:none;-webkit-user-select:none;pointer-events:auto;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:11px 15px 10px;border:1px solid var(--line);max-width:46vw}
 .brand .t{font-family:'Noto Serif KR',serif;font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brand .a{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.brand .a{font-size:10.5px;letter-spacing:.08em;color:var(--muted);margin-top:4px}
 .tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
 .btn{appearance:none;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);font-size:12.5px;font-weight:500;padding:9px 13px;cursor:pointer;letter-spacing:.02em;transition:background .2s,color .2s;line-height:1.2}
 .btn:hover{background:#fff}
@@ -31,8 +31,8 @@ button{font-family:inherit}
 #intro{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(239,236,230,.74);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:opacity .7s}
 #intro.off{opacity:0;pointer-events:none}
 .intro-card{max-width:600px;padding:40px 30px;text-align:center}
-.eyebrow{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
-#intro h1{font-family:'Noto Serif KR',serif;font-weight:600;font-size:clamp(30px,5.4vw,46px);letter-spacing:-.025em;margin:20px 0 10px;line-height:1.18}
+.eyebrow{font-size:11.5px;letter-spacing:.3em;color:var(--muted)}
+#intro h1{font-family:'Noto Serif KR',serif;font-weight:600;font-size:clamp(30px,5.4vw,46px);letter-spacing:-.025em;margin:10px 0 10px;line-height:1.18}
 #intro .sub{font-family:'Noto Serif KR',serif;font-size:clamp(15px,2.4vw,18px);color:#47433c;line-height:1.5}
 .rule{width:34px;height:1px;background:var(--ink);margin:28px auto}
 .artist{font-size:14.5px;letter-spacing:.04em}
@@ -63,9 +63,14 @@ button{font-family:inherit}
 .prose .lbl{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
 .prose a{color:var(--ink)}
 .exlist a{display:block;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.exg{font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:6px}
+.exh{font-size:11.5px;font-weight:500;margin:22px 0 2px;padding-bottom:8px;border-bottom:1px solid var(--ink)}
+.exlist a i{font-style:normal;font-size:10.5px;letter-spacing:.18em;color:var(--muted);display:block;margin-bottom:3px}
+.itype{font-size:12.5px;letter-spacing:.14em;color:#47433c;margin-top:16px}
+#intro .meta .off{font-size:11.5px;color:#8b867c}
 .exlist a b{font-family:'Noto Serif KR',serif;font-weight:600;font-size:15px;display:block}
 .exlist a span{font-size:12px;color:var(--muted)}
-.exlist a.cur b::after{content:' · 지금 보는 전시';font-family:'Noto Sans KR';font-weight:400;font-size:11px;color:var(--muted)}
+.exlist a.cur b::after{content:' · 지금 보는 중';font-family:'Noto Sans KR';font-weight:400;font-size:11px;color:var(--muted)}
 .ed-status{font-size:12px;line-height:1.7;padding:11px 13px;background:#efece5;border:1px solid var(--line);margin-bottom:16px}
 .ed-status.ok{background:#e9f0e6}
 .ed-item{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
@@ -163,6 +168,7 @@ button{font-family:inherit}
 <div id="intro">
   <div class="intro-card">
     <div class="eyebrow" id="iEyebrow">Online Exhibition</div>
+    <div class="itype" id="iType"></div>
     <h1 id="iTitle">&nbsp;</h1>
     <div class="sub" id="iSub"></div>
     <div class="rule"></div>
@@ -409,14 +415,17 @@ async function route(){
 /* ---------------- intro & UI ---------------- */
 function renderIntro(){
   const ex=CFG.exhibition||{}, ar=CFG.artist||{};
-  document.title = `${ex.title||'전시'} · ${ar.name||''}`;
-  $('#iEyebrow').textContent = ex.eyebrow || 'Online Exhibition';
+  const G=galleryInfo();
+  document.title = `${exLabel(ex)} · ${G.name}`;
+  $('#iEyebrow').textContent = G.name_en;
+  $('#iType').textContent = [ex.number?('No.'+String(ex.number).padStart(2,'0')):'', ex.type].filter(Boolean).join('  ·  ');
   $('#iTitle').textContent = ex.title||'';
   $('#iSub').textContent = ex.subtitle||'';
   $('#iArtist').innerHTML = `${esc(ar.name||'')}<span>${esc(ar.name_en||'')}</span>`;
-  $('#iMeta').innerHTML = [ex.period,ex.venue].filter(Boolean).map(esc).join('<br>');
-  $('#bTitle').textContent = ex.title + (ex.subtitle?': '+ex.subtitle:'');
-  $('#bArtist').textContent = [ar.name, ar.name_en].filter(Boolean).join(' · ');
+  const meta=[ex.period?`${esc(ex.period)}`:'', esc(ex.venue||G.name)];
+  if (ex.offline && ex.offline.venue) meta.push(`<span class="off">오프라인 전시 · ${esc(ex.offline.venue)}${ex.offline.period?' · '+esc(ex.offline.period):''}</span>`);
+  $('#iMeta').innerHTML = meta.filter(Boolean).join('<br>');
+  renderBrand();
   $('#intro').classList.remove('off'); $('#hud').classList.remove('on');
 }
 function showIntroLoading(on){ $('#iEnter').disabled=on; $('#iLoad').textContent=on?'전시장을 준비하는 중…':''; }
@@ -444,9 +453,16 @@ function renderList(){
   $('#listGrid').innerHTML = works.map((w,i)=>`<button class="thumb" data-i="${i}"><div class="im" style="background-image:url('${w._thumb||''}')"></div><div class="tt">${esc(w.title)}</div><div class="ts">${esc([w.year,sizeText(w)].filter(Boolean).join(' · '))}</div></button>`).join('');
   $('#listGrid').querySelectorAll('.thumb').forEach(b=>b.onclick=()=>{ $('#dList').classList.remove('open'); focusWork(+b.dataset.i); });
 }
+function galleryInfo(){ const g=(REG&&REG.gallery)||{}; return {name:g.name||'euiart 온라인 갤러리', name_en:g.name_en||'euiart online gallery', site:g.site||''}; }
+function exLabel(ex){ return (ex.type?ex.type+' ':'')+'「'+(ex.title||'')+'」'; }
+function renderBrand(){ const ex=CFG.exhibition||{}, ar=CFG.artist||{};
+  $('#bTitle').textContent = ex.title + (ex.subtitle?': '+ex.subtitle:'');
+  $('#bArtist').textContent = [ex.type, ar.name, galleryInfo().name].filter(Boolean).join(' · '); }
+function exStatus(e){ const t=new Date(); t.setHours(0,0,0,0); const s=e.start?new Date(e.start+'T00:00:00'):null, en=e.end?new Date(e.end+'T23:59:59'):null;
+  if (s && t<s) return 'soon'; if (en && t>en) return 'past'; return 'now'; }
 function renderNote(){
   const ex=CFG.exhibition||{}, ar=CFG.artist||{};
-  let h = `<div class="lbl">${esc(ex.title||'')}${ex.subtitle?': '+esc(ex.subtitle):''}</div>`;
+  let h = `<div class="lbl">${esc(ex.type||'')} ${esc(ex.title||'')}${ex.subtitle?': '+esc(ex.subtitle):''}</div>`;
   h += (ex.statement||[]).map(p=>`<p>${esc(p)}</p>`).join('');
   h += `<div class="lbl">Artist</div><p><b>${esc(ar.name||'')}</b> ${esc(ar.name_en||'')}</p>`;
   if (ar.bio) h += `<p>${esc(ar.bio)}</p>`;
@@ -454,7 +470,12 @@ function renderNote(){
   $('#noteBody').innerHTML = h;
 }
 function renderEx(){
-  $('#exBody').innerHTML = REG.exhibitions.map(e=>`<a href="#${esc(e.id)}" class="${e.id===CUR_ID?'cur':''}"><b>${esc(e.label)}</b><span>${esc(e.desc||'')}</span></a>`).join('');
+  const groups=[['now','전시 중'],['soon','전시 예정'],['past','지난 전시']];
+  const G=galleryInfo();
+  let h=`<div class="exg">${esc(G.name)}</div>`;
+  groups.forEach(([k,lab])=>{ const L=REG.exhibitions.filter(e=>exStatus(e)===k); if(!L.length) return;
+    h+=`<div class="exh">${lab}</div>`+L.map(e=>`<a href="#${esc(e.id)}" class="${e.id===CUR_ID?'cur':''}">${e.number?`<i>No.${String(e.number).padStart(2,'0')}</i>`:''}<b>${esc(e.label)}</b><span>${esc([e.period,e.desc].filter(Boolean).join(' · '))}</span></a>`).join(''); });
+  $('#exBody').innerHTML = h;
   $('#exBody').querySelectorAll('a').forEach(a=>a.onclick=()=>$('#dEx').classList.remove('open'));
 }
 function showInfo(i){
@@ -629,10 +650,12 @@ function buildScene(resetView){
   const half=W/2-1.15;
   const tW=Math.min(half-.3,3.6);
   addWallText([
+    {text:[galleryInfo().name_en, ex.type].filter(Boolean).join('   ·   '),font:'500 26px "Noto Sans KR"',lh:40,after:22,color:shade(sp.text,.35)},
     {text:ex.title||'',font:'600 92px "Noto Serif KR"',lh:118},
     {text:ex.subtitle||'',font:'400 44px "Noto Serif KR"',lh:66,after:56},
     {text:[ar.name,ar.name_en].filter(Boolean).join('   '),font:'500 38px "Noto Sans KR"',lh:54},
-    {text:[ex.period,ex.venue].filter(Boolean).join('   '),font:'400 30px "Noto Sans KR"',lh:46,color:shade(sp.text,.3)}
+    {text:[ex.period,ex.venue||galleryInfo().name].filter(Boolean).join('   '),font:'400 30px "Noto Sans KR"',lh:46,color:shade(sp.text,.3)},
+    {text:(ex.offline&&ex.offline.venue)?('오프라인 전시   '+ex.offline.venue+(ex.offline.period?'   '+ex.offline.period:'')):'',font:'400 26px "Noto Sans KR"',lh:42,color:shade(sp.text,.42)}
   ], tW, .95+tW/2+.2, 2.55, sp.text);
   const sW=Math.min(half-.3,3);
   addWallText([{text:'Artist Statement',font:'500 26px "Noto Sans KR"',lh:40,after:16,color:shade(sp.text,.35)}].concat((ex.statement||[]).map(p=>({text:p,font:'400 30px "Noto Serif KR"',lh:54,after:26}))), sW, -(.95+sW/2+.2), 2.45, sp.text);
@@ -936,7 +959,7 @@ function renderEdit(){
     dirty=false; toast('처음 설정으로 되돌렸어요.'); route();
   };
 }
-function renderIntroText(){ const ex=CFG.exhibition||{}, ar=CFG.artist||{}; $('#bTitle').textContent=ex.title+(ex.subtitle?': '+ex.subtitle:''); $('#bArtist').textContent=[ar.name,ar.name_en].filter(Boolean).join(' · '); renderNote(); }
+function renderIntroText(){ renderBrand(); renderNote(); }
 let rbT; function scheduleRebuild(){ clearTimeout(rbT); rbT=setTimeout(()=>{ buildScene(false); renderList(); },600); }
 
 $('#filePick').onchange=e=>{ const f=e.target.files[0]; if(f!=null && pickTarget!=null) replaceImage(pickTarget,f); };

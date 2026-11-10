@@ -6,11 +6,17 @@
     "website": "https://www.euiart.com"
   },
   "exhibition": {
-    "eyebrow": "Solo Exhibition · Online",
+    "type": "초대 개인전",
+    "type_en": "Invitational Solo Exhibition",
+    "number": 1,
     "title": "관계의 가변성",
     "subtitle": "연기(緣起)와 리좀의 회화적 구현",
-    "period": "2026. 11. 21 – 11. 26",
-    "venue": "KMJ 아트 갤러리 2층",
+    "period": "2026. 11. 21 – 12. 20",
+    "venue": "euiart 온라인 갤러리",
+    "offline": {
+      "venue": "KMJ 아트 갤러리 2층",
+      "period": "2026. 11. 21 – 11. 26"
+    },
     "statement": [
       "파편화되고 고립된 현대 사회에서 개인은 타자와 어떻게 유기적으로 얽혀 존재하는가. 화면 위에 교차하는 무수한 선은 가변적인 관계의 흐름이다.",
       "리좀이 끊어져도 기존의 선을 따라, 혹은 전혀 새로운 선으로 다시 뻗어 나가듯, 관계 또한 단절에 멈추지 않고 다시 이어지고 도약하며 확장된다.",

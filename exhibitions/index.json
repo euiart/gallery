@@ -1,10 +1,19 @@
 {
+  "gallery": {
+    "name": "euiart 온라인 갤러리",
+    "name_en": "euiart online gallery",
+    "site": "https://www.euiart.com"
+  },
   "default": "seo-euijeong",
   "exhibitions": [
     {
       "id": "seo-euijeong",
-      "label": "서의정 — 관계의 가변성",
-      "desc": "2026 개인전 · 얽힘 연작",
+      "number": 1,
+      "label": "초대 개인전 「관계의 가변성」 서의정",
+      "period": "2026. 11. 21 – 12. 20",
+      "start": "2026-11-21",
+      "end": "2026-12-20",
+      "desc": "얽힘 연작 10점",
       "file": "exhibitions/seo-euijeong.json"
     }
   ]
