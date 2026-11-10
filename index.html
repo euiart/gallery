@@ -1,11 +1,875 @@
-{
-  "default": "seo-euijeong",
-  "exhibitions": [
-    {
-      "id": "seo-euijeong",
-      "label": "서의정 — 관계의 가변성",
-      "desc": "2026 개인전 · 얽힘 연작",
-      "file": "exhibitions/seo-euijeong.json"
-    }
-  ]
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>가상 전시장 · Virtual Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1b19;--muted:#6f6a61;--paper:#f7f5f0;--line:rgba(28,27,25,.13);--glass:rgba(248,246,241,.86)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#dedad3;font-family:'Noto Sans KR',system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none;cursor:grab}
+#c:active{cursor:grabbing}
+button{font-family:inherit}
+.hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 20px;pointer-events:none;z-index:5;opacity:0;transition:opacity .6s}
+.hud.on{opacity:1}
+.brand{user-select:none;-webkit-user-select:none;pointer-events:auto;background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:11px 15px 10px;border:1px solid var(--line);max-width:46vw}
+.brand .t{font-family:'Noto Serif KR',serif;font-size:15px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand .a{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto}
+.btn{appearance:none;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);font-size:12.5px;font-weight:500;padding:9px 13px;cursor:pointer;letter-spacing:.02em;transition:background .2s,color .2s;line-height:1.2}
+.btn:hover{background:#fff}
+.btn.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.dark:hover{background:#000}
+.btn.ghost{background:transparent;backdrop-filter:none}
+.btn:disabled{opacity:.4;cursor:default}
+.hint{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);font-size:12px;color:#3c3a35;background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:9px 15px;border:1px solid var(--line);white-space:nowrap;transition:opacity .8s;z-index:4;opacity:0;pointer-events:none}
+.hint.on{opacity:1}
+#intro{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;background:rgba(239,236,230,.74);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:opacity .7s}
+#intro.off{opacity:0;pointer-events:none}
+.intro-card{max-width:600px;padding:40px 30px;text-align:center}
+.eyebrow{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+#intro h1{font-family:'Noto Serif KR',serif;font-weight:600;font-size:clamp(30px,5.4vw,46px);letter-spacing:-.025em;margin:20px 0 10px;line-height:1.18}
+#intro .sub{font-family:'Noto Serif KR',serif;font-size:clamp(15px,2.4vw,18px);color:#47433c;line-height:1.5}
+.rule{width:34px;height:1px;background:var(--ink);margin:28px auto}
+.artist{font-size:14.5px;letter-spacing:.04em}
+.artist span{color:var(--muted);margin-left:8px;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.meta{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.75}
+.enter{margin-top:32px;padding:14px 38px;font-size:13px;letter-spacing:.2em}
+.loading{font-size:12px;color:var(--muted);margin-top:18px;letter-spacing:.06em;min-height:18px}
+.panel{position:fixed;z-index:8;background:rgba(250,249,246,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);box-shadow:0 24px 60px -24px rgba(0,0,0,.28)}
+#info{right:20px;bottom:20px;width:350px;padding:22px 22px 16px;transform:translateY(14px);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s}
+#info.show{transform:none;opacity:1;pointer-events:auto}
+.idx{font-size:10.5px;letter-spacing:.22em;color:#8b867c;display:flex;justify-content:space-between;align-items:center}
+.x{border:0;background:none;font-size:20px;line-height:1;cursor:pointer;color:#6f6a61;padding:0 2px}
+#info h2{font-family:'Noto Serif KR',serif;font-weight:600;font-size:22px;margin:9px 0 3px;letter-spacing:-.01em}
+.en{font-size:12.5px;color:var(--muted);letter-spacing:.03em;font-style:italic}
+.specs{font-size:12.5px;color:#3c3a35;margin-top:13px;line-height:1.75;border-top:1px solid var(--line);padding-top:12px}
+.note{font-size:13px;line-height:1.8;color:#3c3a35;margin-top:8px;max-height:26vh;overflow:auto;white-space:pre-line}
+.nav{display:flex;justify-content:space-between;margin-top:16px;gap:6px}
+.drawer{top:0;right:0;bottom:0;width:min(420px,100vw);transform:translateX(104%);transition:transform .38s cubic-bezier(.2,.7,.2,1);overflow:auto;padding:24px 24px 40px;z-index:12}
+.drawer.open{transform:none}
+.drawer h3{font-family:'Noto Serif KR',serif;font-weight:600;font-size:19px;margin:0}
+.dhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:sticky;top:-24px;background:rgba(250,249,246,.97);padding:14px 0 10px;margin-top:-14px;z-index:2}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 12px}
+.thumb{cursor:pointer;border:0;background:none;padding:0;text-align:left}
+.thumb .im{width:100%;aspect-ratio:1;background:#e4e1da center/contain no-repeat;border:1px solid var(--line)}
+.thumb .tt{font-size:12.5px;margin-top:7px;font-weight:500}
+.thumb .ts{font-size:11px;color:var(--muted);margin-top:2px}
+.prose p{font-family:'Noto Serif KR',serif;font-size:14.5px;line-height:1.95;color:#2e2c28;margin:0 0 14px;word-break:keep-all}
+.prose .lbl{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
+.prose a{color:var(--ink)}
+.exlist a{display:block;padding:14px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.exlist a b{font-family:'Noto Serif KR',serif;font-weight:600;font-size:15px;display:block}
+.exlist a span{font-size:12px;color:var(--muted)}
+.exlist a.cur b::after{content:' · 지금 보는 전시';font-family:'Noto Sans KR';font-weight:400;font-size:11px;color:var(--muted)}
+.ed-status{font-size:12px;line-height:1.7;padding:11px 13px;background:#efece5;border:1px solid var(--line);margin-bottom:16px}
+.ed-status.ok{background:#e9f0e6}
+.ed-item{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.ed-item .im{width:78px;height:78px;background:#e4e1da center/contain no-repeat;border:1px dashed rgba(0,0,0,.25);cursor:pointer;position:relative}
+.ed-item .im.drag{outline:2px solid var(--ink)}
+.ed-item .im small{position:absolute;left:0;right:0;bottom:0;font-size:10px;text-align:center;background:rgba(28,27,25,.72);color:#fff;padding:2px 0}
+.fld{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.fld input,.fld textarea,.ed-sec input,.ed-sec textarea{width:100%;font:13px 'Noto Sans KR';padding:6px 8px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:0}
+.fld textarea,.ed-sec textarea{grid-column:1/-1;min-height:46px;resize:vertical}
+.fld .full{grid-column:1/-1}
+.ed-row{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.ed-row .btn{padding:6px 9px;font-size:11.5px}
+.ed-sec{display:grid;gap:6px;margin-bottom:14px}
+.ed-sec label{font-size:11px;color:var(--muted);letter-spacing:.06em}
+.sticky-save{position:sticky;bottom:-40px;background:rgba(250,249,246,.97);padding:12px 0 14px;border-top:1px solid var(--line);display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+#lightPanel{top:74px;right:20px;width:260px;padding:16px 18px 14px;z-index:9}
+.lp-row{display:flex;justify-content:space-between;font-size:12.5px;margin:6px 0 4px}
+.lp-row span{color:var(--muted);font-variant-numeric:tabular-nums}
+#lightPanel input[type=range]{width:100%;accent-color:#1c1b19;margin:0 0 10px}
+.lp-foot{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);line-height:1.4}
+.lp-foot .btn{padding:6px 10px;font-size:11.5px}
+@media (max-width:640px){#lightPanel{top:auto;bottom:10px;left:10px;right:10px;width:auto}}
+#toast{position:fixed;left:50%;top:22px;transform:translate(-50%,-10px);background:var(--ink);color:var(--paper);font-size:12.5px;padding:10px 16px;opacity:0;transition:.3s;z-index:40;pointer-events:none;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+#copybox{width:100%;height:220px;font:11px/1.5 ui-monospace,monospace;margin-top:8px;display:none}
+#err{position:fixed;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:50;background:var(--paper);font-size:14px;line-height:1.8}
+@media (max-width:640px){
+  .hud{padding:10px}
+  .brand{max-width:52vw;padding:8px 11px}
+  .brand .t{font-size:13px}
+  .btn{padding:8px 10px;font-size:11.5px}
+  #info{left:10px;right:10px;bottom:10px;width:auto;padding:16px 16px 12px}
+  #info h2{font-size:19px}
+  .note{max-height:18vh}
+  .hint{bottom:10px;font-size:11px;white-space:normal;width:max-content;max-width:92vw;text-align:center}
 }
+</style>
+</head>
+<body>
+<canvas id="c" tabindex="0" aria-label="3D 가상 전시장"></canvas>
+
+<div class="hud" id="hud">
+  <div class="brand" id="brand"><div class="t" id="bTitle"></div><div class="a" id="bArtist"></div></div>
+  <div class="tools">
+    <button class="btn dark" id="bTour">순서대로 보기</button>
+    <button class="btn" id="bList">작품 목록</button>
+    <button class="btn" id="bNote">작가노트</button>
+    <button class="btn" id="bEx">전시 목록</button>
+    <button class="btn" id="bLight">조명</button>
+    <button class="btn" id="bEdit" hidden>편집</button>
+  </div>
+</div>
+<div class="hint" id="hint"></div>
+<div class="panel" id="lightPanel" hidden>
+  <div class="lp-row"><label for="lpRoom">공간 밝기</label><span id="lpRoomV"></span></div>
+  <input type="range" id="lpRoom" min="0" max="100" step="1">
+  <div class="lp-row"><label for="lpArt">작품 조명</label><span id="lpArtV"></span></div>
+  <input type="range" id="lpArt" min="0" max="100" step="1">
+  <div class="lp-foot"><button class="btn" id="lpReset">기본값</button><span id="lpNote"></span></div>
+</div>
+
+<div id="intro">
+  <div class="intro-card">
+    <div class="eyebrow" id="iEyebrow">Online Exhibition</div>
+    <h1 id="iTitle">&nbsp;</h1>
+    <div class="sub" id="iSub"></div>
+    <div class="rule"></div>
+    <div class="artist" id="iArtist"></div>
+    <div class="meta" id="iMeta"></div>
+    <button class="btn dark enter" id="iEnter" disabled>입장하기</button>
+    <div class="loading" id="iLoad">전시장을 준비하는 중…</div>
+  </div>
+</div>
+
+<div class="panel" id="info" role="dialog" aria-live="polite">
+  <div class="idx"><span id="nIdx"></span><button class="x" id="nClose" aria-label="닫기">×</button></div>
+  <h2 id="nTitle"></h2>
+  <div class="en" id="nEn"></div>
+  <div class="specs" id="nSpecs"></div>
+  <div class="note" id="nNote"></div>
+  <div class="nav"><button class="btn" id="nPrev">← 이전</button><button class="btn" id="nNext">다음 →</button></div>
+</div>
+
+<aside class="panel drawer" id="dList"><div class="dhead"><h3>작품 목록</h3><button class="x" data-close>×</button></div><div class="grid" id="listGrid"></div></aside>
+<aside class="panel drawer" id="dNote"><div class="dhead"><h3>작가노트</h3><button class="x" data-close>×</button></div><div class="prose" id="noteBody"></div></aside>
+<aside class="panel drawer" id="dEx"><div class="dhead"><h3>전시 목록</h3><button class="x" data-close>×</button></div><div class="exlist" id="exBody"></div></aside>
+<aside class="panel drawer" id="dEdit"><div class="dhead"><h3>전시 편집</h3><button class="x" data-close>×</button></div><div id="editBody"></div></aside>
+
+<div id="toast"></div>
+<div id="err"></div>
+<input type="file" id="filePick" accept="image/*" hidden>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const isTouch = matchMedia('(pointer: coarse)').matches;
+const EYE = 1.6;
+
+if (!window.THREE) { showErr('3D 엔진을 불러오지 못했어요. 인터넷 연결을 확인하고 새로고침해 주세요.'); return; }
+function showErr(m){ const e=$('#err'); e.textContent=m; e.style.display='flex'; }
+
+/* ---------------- renderer ---------------- */
+const canvas = $('#c');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: false });
+} catch (e) { showErr('이 브라우저에서는 3D 화면을 표시할 수 없어요. 다른 브라우저(크롬, 사파리 최신 버전)로 열어 주세요.'); return; }
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isTouch ? 1.5 : 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#e7e4de');
+const camera = new THREE.PerspectiveCamera(isTouch ? 72 : 64, 1, 0.05, 200);
+camera.rotation.order = 'YXZ';
+const ANISO = renderer.capabilities.getMaxAnisotropy();
+const loader = new THREE.TextureLoader();
+loader.setCrossOrigin('anonymous');
+
+function resize(){ const w=innerWidth,h=innerHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+
+/* ---------------- state ---------------- */
+let REG = null, CFG = null, CUR_ID = null, world = null;
+const view = { yaw: 0.3, pitch: 0, pos: new THREE.Vector3(0, EYE, -2.4) };
+let bounds = { minX:-4, maxX:4, minZ:-9, maxZ:-0.6 };
+let works = [], artMeshes = [], floorMesh = null, focusIndex = -1, anim = null, ROOM = null;
+let caps = { db:null, assets:null, user:null, canEdit:false, checked:false };
+
+/* ---------------- helpers ---------------- */
+const mk = (w,h) => { const c=document.createElement('canvas'); c.width=Math.max(1,w|0); c.height=Math.max(1,h|0); return c; };
+function ctex(cv){ const t=new THREE.CanvasTexture(cv); t.encoding=THREE.sRGBEncoding; t.anisotropy=ANISO; return t; }
+function hexA(hex,a){ const c=new THREE.Color(hex); return `rgba(${Math.round(c.r*255)},${Math.round(c.g*255)},${Math.round(c.b*255)},${a})`; }
+function shade(hex,l){ const c=new THREE.Color(hex); c.offsetHSL(0,0,l); return '#'+c.getHexString(); }
+function rng(seed){ let s=((seed||1)*2654435761)>>>0||1; return ()=>{ s^=s<<13; s>>>=0; s^=s>>>17; s^=s<<5; s>>>=0; return s/4294967296; }; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+let toastT; function toast(m,ms=2600){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('on'),ms); }
+function wrap(g,text,maxW){
+  const out=[];
+  for (const para of String(text||'').split('\n')){
+    const words=para.split(' '); let line='';
+    for (const wd of words){
+      const test=line?line+' '+wd:wd;
+      if (g.measureText(test).width<=maxW){ line=test; continue; }
+      if (line) out.push(line);
+      if (g.measureText(wd).width<=maxW) line=wd;
+      else { line=''; for (const ch of wd){ if (g.measureText(line+ch).width>maxW){ out.push(line); line=ch; } else line+=ch; } }
+    }
+    out.push(line);
+  }
+  return out;
+}
+function sizeText(w){ return w.size || ((w.width_cm&&w.height_cm)?`${w.width_cm}×${w.height_cm}cm`:''); }
+
+/* ---------------- shared textures ---------------- */
+const glowTex = (()=>{ const c=mk(256,256),g=c.getContext('2d'); const gr=g.createRadialGradient(128,118,0,128,128,128); gr.addColorStop(0,'rgba(255,246,228,1)'); gr.addColorStop(.5,'rgba(255,242,220,.5)'); gr.addColorStop(1,'rgba(255,240,215,0)'); g.fillStyle=gr; g.fillRect(0,0,256,256); return ctex(c); })();
+const shadowTex = (()=>{ const c=mk(256,256),g=c.getContext('2d'); g.shadowColor='rgba(0,0,0,.75)'; g.shadowBlur=26; g.shadowOffsetX=1000; g.fillStyle='#000'; g.fillRect(-1000+38,38,180,180); return ctex(c); })();
+const planeGeo = new THREE.PlaneGeometry(1,1);
+const boxGeo = new THREE.BoxGeometry(1,1,1);
+const SHARED = new Set([planeGeo, boxGeo, glowTex, shadowTex]);
+
+function wallTexture(){
+  const c=mk(64,512),g=c.getContext('2d');
+  const gr=g.createLinearGradient(0,0,0,512);
+  gr.addColorStop(0,'#dcdcdc'); gr.addColorStop(.18,'#f6f6f6'); gr.addColorStop(.55,'#ffffff'); gr.addColorStop(.9,'#efefef'); gr.addColorStop(1,'#d6d6d6');
+  g.fillStyle=gr; g.fillRect(0,0,64,512); return ctex(c);
+}
+function floorTexture(style,color){
+  const S=1024,c=mk(S,S),g=c.getContext('2d'),r=rng(7);
+  if (style==='wood'){
+    const rows=10,rh=S/rows;
+    for (let y=0;y<rows;y++){
+      let x=-r()*S*.5;
+      while (x<S){ const len=S*(.35+r()*.45); g.fillStyle=shade(color,(r()-.5)*.07); g.fillRect(x,y*rh,len,rh);
+        g.strokeStyle='rgba(0,0,0,.05)'; g.lineWidth=1;
+        for (let k=0;k<14;k++){ const yy=y*rh+r()*rh; g.beginPath(); g.moveTo(x,yy); g.bezierCurveTo(x+len*.3,yy+(r()-.5)*8,x+len*.7,yy+(r()-.5)*8,x+len,yy); g.stroke(); }
+        g.fillStyle='rgba(0,0,0,.22)'; g.fillRect(x,y*rh,2,rh); x+=len; }
+      g.fillStyle='rgba(0,0,0,.25)'; g.fillRect(0,y*rh,S,2);
+    }
+  } else {
+    g.fillStyle=color; g.fillRect(0,0,S,S);
+    for (let k=0;k<420;k++){ const x=r()*S,y=r()*S,rad=20+r()*140; const gr=g.createRadialGradient(x,y,0,x,y,rad); const d=r()<.5; gr.addColorStop(0,d?'rgba(0,0,0,.05)':'rgba(255,255,255,.06)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.fillRect(x-rad,y-rad,rad*2,rad*2); }
+    for (let k=0;k<5000;k++){ g.fillStyle=r()<.5?'rgba(0,0,0,.06)':'rgba(255,255,255,.07)'; g.fillRect(r()*S,r()*S,1.4,1.4); }
+    g.fillStyle='rgba(0,0,0,.09)'; g.fillRect(0,0,S,2); g.fillRect(0,0,2,S);
+  }
+  const t=ctex(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; return t;
+}
+
+/* ---------------- placeholder artworks (shown until a real image is set) ---------------- */
+function placeholderCanvas(w,i){
+  const p=w.placeholder||{}, r=rng(p.seed||i+11), ar=w._w/w._h, B=1024;
+  const W=ar>=1?B:Math.round(B*ar), H=ar>=1?Math.round(B/ar):B;
+  const c=mk(W,H), g=c.getContext('2d');
+  if ((p.style||'entanglement')==='fields') drawFields(g,W,H,p,r); else drawEntangle(g,W,H,p,r);
+  return c;
+}
+function linePath(W,H,r){
+  const P=new Path2D(); let x=r()*W, y=r()*H; P.moveTo(x,y);
+  const segs=2+Math.floor(r()*4);
+  for (let s=0;s<segs;s++){ const nx=(r()*1.3-.15)*W, ny=(r()*1.3-.15)*H; P.bezierCurveTo((r()*1.4-.2)*W,(r()*1.4-.2)*H,(r()*1.4-.2)*W,(r()*1.4-.2)*H,nx,ny); }
+  return P;
+}
+function drawEntangle(g,W,H,p,r){
+  const k=W/1024, bg=p.bg||'#2b4a7a', ln=p.lines||'#f1ebde', sq=p.square||'#111111', mist=p.mist||[shade(bg,.15),shade(bg,-.15)], acc=p.accents||[];
+  g.fillStyle=bg; g.fillRect(0,0,W,H);
+  for (let i=0;i<28;i++){ const x=r()*W,y=r()*H,rad=(.15+r()*.45)*Math.max(W,H),col=mist[i%mist.length]; const gr=g.createRadialGradient(x,y,0,x,y,rad); gr.addColorStop(0,hexA(col,.22)); gr.addColorStop(1,hexA(col,0)); g.fillStyle=gr; g.fillRect(0,0,W,H); }
+  g.lineCap='round'; g.lineJoin='round';
+  const n=p.density||120;
+  for (let i=0;i<n;i++){
+    const P=linePath(W,H,r), lw=(2.2+r()*6.5)*k, col=(acc.length&&r()<.28)?acc[Math.floor(r()*acc.length)]:ln;
+    g.save(); g.shadowColor='rgba(0,0,0,.42)'; g.shadowBlur=4*k; g.shadowOffsetY=2.4*k; g.strokeStyle=hexA(col,.92); g.lineWidth=lw; g.stroke(P); g.restore();
+    g.strokeStyle='rgba(255,255,255,.28)'; g.lineWidth=Math.max(1,lw*.32); g.save(); g.translate(-.8*k,-1.2*k); g.stroke(P); g.restore();
+  }
+  for (let i=0;i<14;i++){ const x=r()*W,y=r()*H,rad=(.12+r()*.3)*W; const gr=g.createRadialGradient(x,y,0,x,y,rad); gr.addColorStop(0,hexA(bg,.38)); gr.addColorStop(1,hexA(bg,0)); g.fillStyle=gr; g.fillRect(0,0,W,H); }
+  const side=Math.min(W,H)*(p.squareSize||.34), x0=(W-side)/2, y0=(H-side)/2;
+  g.save(); g.shadowColor='rgba(0,0,0,.35)'; g.shadowBlur=18*k; g.shadowOffsetY=6*k; g.fillStyle=hexA(sq,.9); g.fillRect(x0,y0,side,side); g.restore();
+  g.save(); g.beginPath(); g.rect(x0,y0,side,side); g.clip();
+  for (let i=0;i<22;i++){ g.strokeStyle=hexA(shade(sq,.25),.35); g.lineWidth=(2+r()*4)*k; g.stroke(linePath(W,H,r)); }
+  const gl=g.createLinearGradient(x0,y0,x0+side,y0+side); gl.addColorStop(0,'rgba(255,255,255,.34)'); gl.addColorStop(.32,'rgba(255,255,255,.04)'); gl.addColorStop(.62,'rgba(255,255,255,0)'); gl.addColorStop(1,'rgba(255,255,255,.12)');
+  g.fillStyle=gl; g.fillRect(x0,y0,side,side); g.restore();
+  g.strokeStyle='rgba(255,255,255,.22)'; g.lineWidth=2*k; g.strokeRect(x0+1,y0+1,side-2,side-2);
+  const v=g.createRadialGradient(W/2,H/2,Math.min(W,H)*.35,W/2,H/2,Math.max(W,H)*.75); v.addColorStop(0,'rgba(0,0,0,0)'); v.addColorStop(1,'rgba(0,0,0,.16)'); g.fillStyle=v; g.fillRect(0,0,W,H);
+}
+function drawFields(g,W,H,p,r){
+  const k=W/1024, bg=p.bg||'#e9e2d3', cols=p.colors||['#c8553d','#2d6a8f','#e8b04a','#33312c'];
+  g.fillStyle=bg; g.fillRect(0,0,W,H);
+  const n=5+Math.floor(r()*3);
+  for (let i=0;i<n;i++){ const w=(.3+r()*.55)*W,h=(.18+r()*.4)*H,x=r()*(W-w*.6)-w*.2,y=r()*(H-h*.6)-h*.2; g.save(); g.shadowColor=hexA(cols[i%cols.length],.85); g.shadowBlur=40*k; g.shadowOffsetX=4000; g.fillStyle='#000'; g.globalAlpha=.75+r()*.25; g.fillRect(x-4000,y,w,h); g.restore(); }
+  g.lineCap='round';
+  for (let i=0;i<260;i++){ const x=r()*W,y=r()*H,l=(20+r()*120)*k,a=r()*Math.PI; g.strokeStyle=hexA(r()<.55?bg:cols[Math.floor(r()*cols.length)],.18+r()*.25); g.lineWidth=(3+r()*14)*k; g.beginPath(); g.moveTo(x,y); g.lineTo(x+Math.cos(a)*l,y+Math.sin(a)*l); g.stroke(); }
+}
+function plaqueCanvas(w){
+  const c=mk(600,320),g=c.getContext('2d');
+  g.fillStyle='#fbfaf7'; g.fillRect(0,0,600,320);
+  g.fillStyle='#1d1c1a'; let fs=46; g.font=`600 ${fs}px "Noto Serif KR"`; while(g.measureText(w.title||'').width>530&&fs>26){fs-=2; g.font=`600 ${fs}px "Noto Serif KR"`;}
+  g.fillText(w.title||'무제',36,86);
+  g.fillStyle='#6b675f'; g.font='italic 400 25px "Noto Sans KR"'; g.fillText(w.title_en||'',36,128);
+  g.fillStyle='#2c2a27'; g.font='400 24px "Noto Sans KR"';
+  g.fillText([w.year,w.medium].filter(Boolean).join(', '),36,206);
+  g.fillText(sizeText(w),36,244);
+  return c;
+}
+
+/* ---------------- data loading ---------------- */
+async function loadJSON(u){ const r=await fetch(u,{cache:'no-cache'}); if(!r.ok) throw new Error(u+' '+r.status); return r.json(); }
+const clone = o => JSON.parse(JSON.stringify(o));
+function cleanCfg(cfg){ const o=clone(cfg); (o.works||[]).forEach(w=>{ for (const k of Object.keys(w)) if (k[0]==='_') delete w[k]; }); return o; }
+
+async function initCaps(){
+  if (caps.checked) return caps; caps.checked=true;
+  if (!window.claude || typeof window.claude.use!=='function') return caps;
+  try {
+    const [db,assets,user]=await Promise.all([claude.use('db'),claude.use('assets'),claude.use('user')]);
+    caps.db=db; caps.assets=assets; caps.user=user;
+    let ce=false; try{ ce = user ? !!(await user.canEdit()) : false; }catch(e){}
+    caps.canEdit = ce && !!db;
+  } catch(e){}
+  return caps;
+}
+async function loadSaved(id){
+  if (!caps.db) return null;
+  try {
+    const snap=await Promise.race([caps.db.doc('exhibitions/'+id).get(), new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),8000))]);
+    const d = snap && (typeof snap.data==='function' ? snap.data() : snap);
+    if (d && d.config) return JSON.parse(d.config);
+  } catch(e){}
+  return null;
+}
+
+async function route(){
+  const id = location.hash.slice(1) || REG.default || REG.exhibitions[0].id;
+  const entry = REG.exhibitions.find(e=>e.id===id) || REG.exhibitions[0];
+  CUR_ID = entry.id;
+  showIntroLoading(true);
+  let cfg = await loadJSON(entry.file);
+  await initCaps();
+  const saved = await loadSaved(entry.id);
+  if (saved && saved.works) cfg = saved;
+  CFG = cfg;
+  renderIntro();
+  try { await Promise.race([Promise.all(['600 40px "Noto Serif KR"','400 20px "Noto Sans KR"','italic 400 20px "Noto Sans KR"'].map(f=>document.fonts.load(f))), new Promise(r=>setTimeout(r,2500))]); } catch(e){}
+  buildScene(true);
+  renderList(); renderNote(); renderEx(); $('#bEdit').hidden=!caps.canEdit;
+  showIntroLoading(false);
+}
+
+/* ---------------- intro & UI ---------------- */
+function renderIntro(){
+  const ex=CFG.exhibition||{}, ar=CFG.artist||{};
+  document.title = `${ex.title||'전시'} · ${ar.name||''}`;
+  $('#iEyebrow').textContent = ex.eyebrow || 'Online Exhibition';
+  $('#iTitle').textContent = ex.title||'';
+  $('#iSub').textContent = ex.subtitle||'';
+  $('#iArtist').innerHTML = `${esc(ar.name||'')}<span>${esc(ar.name_en||'')}</span>`;
+  $('#iMeta').innerHTML = [ex.period,ex.venue].filter(Boolean).map(esc).join('<br>');
+  $('#bTitle').textContent = ex.title + (ex.subtitle?': '+ex.subtitle:'');
+  $('#bArtist').textContent = [ar.name, ar.name_en].filter(Boolean).join(' · ');
+  $('#intro').classList.remove('off'); $('#hud').classList.remove('on');
+}
+function showIntroLoading(on){ $('#iEnter').disabled=on; $('#iLoad').textContent=on?'전시장을 준비하는 중…':''; }
+$('#iEnter').onclick = () => { $('#intro').classList.add('off'); $('#hud').classList.add('on'); showHint(); canvas.focus(); };
+function showHint(){ const h=$('#hint'); h.textContent = isTouch ? '드래그: 둘러보기 · 바닥 탭: 이동 · 작품 탭: 감상' : '드래그: 둘러보기 · 바닥 클릭: 이동 · 작품 클릭: 감상 · W A S D / 방향키: 걷기'; h.classList.add('on'); setTimeout(()=>h.classList.remove('on'),9000); }
+
+function openDrawer(id){ document.querySelectorAll('.drawer').forEach(d=>d.classList.toggle('open', d.id===id && !d.classList.contains('open'))); }
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>b.closest('.drawer').classList.remove('open'));
+$('#bList').onclick=()=>openDrawer('dList');
+$('#bNote').onclick=()=>openDrawer('dNote');
+$('#bEx').onclick=()=>openDrawer('dEx');
+$('#bEdit').onclick=()=>{ renderEdit(); openDrawer('dEdit'); };
+$('#brand').ondblclick=()=>{ $('#bEdit').hidden=false; renderEdit(); openDrawer('dEdit'); };
+$('#bTour').onclick=()=>focusWork(focusIndex<0?0:focusIndex+1);
+$('#nClose').onclick=hideInfo;
+$('#bLight').onclick=()=>{ const p=$('#lightPanel'); p.hidden=!p.hidden; if(!p.hidden) syncLightUI(); };
+function syncLightUI(){ const v=lightVals(); $('#lpRoom').value=v.room; $('#lpArt').value=v.art; $('#lpRoomV').textContent=v.room; $('#lpArtV').textContent=v.art;
+  $('#lpNote').textContent = caps.canEdit ? '편집에서 저장하면 모든 관람객에게 반영돼요' : ''; }
+['lpRoom','lpArt'].forEach(id=>$('#'+id).oninput=e=>{ CFG.space=CFG.space||{}; CFG.space[id==='lpRoom'?'room_light':'art_light']=+e.target.value; syncLightUI(); applyLighting(); if(caps.canEdit) setDirty(true); });
+$('#lpReset').onclick=()=>{ CFG.space=CFG.space||{}; delete CFG.space.room_light; delete CFG.space.art_light; syncLightUI(); applyLighting(); if(caps.canEdit) setDirty(true); };
+$('#nPrev').onclick=()=>focusWork(focusIndex-1);
+$('#nNext').onclick=()=>focusWork(focusIndex+1);
+
+function renderList(){
+  $('#listGrid').innerHTML = works.map((w,i)=>`<button class="thumb" data-i="${i}"><div class="im" style="background-image:url('${w._thumb||''}')"></div><div class="tt">${esc(w.title)}</div><div class="ts">${esc([w.year,sizeText(w)].filter(Boolean).join(' · '))}</div></button>`).join('');
+  $('#listGrid').querySelectorAll('.thumb').forEach(b=>b.onclick=()=>{ $('#dList').classList.remove('open'); focusWork(+b.dataset.i); });
+}
+function renderNote(){
+  const ex=CFG.exhibition||{}, ar=CFG.artist||{};
+  let h = `<div class="lbl">${esc(ex.title||'')}${ex.subtitle?': '+esc(ex.subtitle):''}</div>`;
+  h += (ex.statement||[]).map(p=>`<p>${esc(p)}</p>`).join('');
+  h += `<div class="lbl">Artist</div><p><b>${esc(ar.name||'')}</b> ${esc(ar.name_en||'')}</p>`;
+  if (ar.bio) h += `<p>${esc(ar.bio)}</p>`;
+  if (ar.website) h += `<p><a href="${esc(ar.website)}" target="_blank" rel="noopener">${esc(ar.website.replace(/^https?:\/\//,''))}</a></p>`;
+  $('#noteBody').innerHTML = h;
+}
+function renderEx(){
+  $('#exBody').innerHTML = REG.exhibitions.map(e=>`<a href="#${esc(e.id)}" class="${e.id===CUR_ID?'cur':''}"><b>${esc(e.label)}</b><span>${esc(e.desc||'')}</span></a>`).join('');
+  $('#exBody').querySelectorAll('a').forEach(a=>a.onclick=()=>$('#dEx').classList.remove('open'));
+}
+function showInfo(i){
+  const w=works[i];
+  $('#nIdx').textContent = String(i+1).padStart(2,'0')+' / '+String(works.length).padStart(2,'0');
+  $('#nTitle').textContent = w.title||'무제';
+  $('#nEn').textContent = w.title_en||'';
+  $('#nSpecs').innerHTML = [w.year,w.medium,sizeText(w)].filter(Boolean).map(esc).join('<br>');
+  $('#nNote').textContent = w.note||'';
+  $('#info').classList.add('show');
+  $('#bTour').textContent='다음 작품';
+}
+function hideInfo(){ $('#info').classList.remove('show'); $('#bTour').textContent = focusIndex<0?'순서대로 보기':'다음 작품'; }
+
+/* ---------------- build the room ---------------- */
+function disposeWorld(){
+  if (!world) return;
+  world.traverse(o=>{
+    if (o.geometry && !SHARED.has(o.geometry)) o.geometry.dispose();
+    const mats = o.material ? (Array.isArray(o.material)?o.material:[o.material]) : [];
+    mats.forEach(m=>{ if (m.map && !SHARED.has(m.map)) m.map.dispose(); m.dispose(); });
+  });
+  scene.remove(world); world=null;
+}
+function layout(list, W, D, F, M, gap){
+  const segLen=[D-F-M, W-2*M, D-M-F];
+  if (list.length<=4) segLen[0]=segLen[2]=0;
+  const total=list.reduce((a,w)=>a+w._w+gap,0), sumL=segLen[0]+segLen[1]+segLen[2];
+  const b1=total*segLen[0]/sumL, b2=total*(segLen[0]+segLen[1])/sumL;
+  const groups=[[],[],[]]; let cum=0;
+  list.forEach(w=>{ const mid=cum+(w._w+gap)/2; groups[mid<b1?0:mid<b2?1:2].push(w); cum+=w._w+gap; });
+  const plan=[];
+  for (let s=0;s<3;s++){
+    const g=groups[s]; if(!g.length) continue;
+    const sum=g.reduce((a,w)=>a+w._w,0), sp=(segLen[s]-sum)/(g.length+1);
+    if (sp<gap*.85) return null;
+    let x=sp; g.forEach(w=>{ plan[w._i]={seg:s,s:x+w._w/2}; x+=w._w+sp; });
+  }
+  return plan;
+}
+/* realistic-room textures */
+const scallopTex = (()=>{ const c=mk(256,512),g=c.getContext('2d');
+  g.save(); g.translate(128,150); g.scale(1,2.3);
+  const gr=g.createRadialGradient(0,0,0,0,0,120); gr.addColorStop(0,'rgba(255,250,240,1)'); gr.addColorStop(.35,'rgba(255,248,236,.75)'); gr.addColorStop(.7,'rgba(255,246,232,.25)'); gr.addColorStop(1,'rgba(255,246,232,0)');
+  g.fillStyle=gr; g.beginPath(); g.arc(0,0,120,0,Math.PI*2); g.fill(); g.restore();
+  const fade=g.createLinearGradient(0,0,0,70); fade.addColorStop(0,'rgba(0,0,0,1)'); fade.addColorStop(1,'rgba(0,0,0,0)');
+  g.globalCompositeOperation='destination-out'; g.fillStyle=fade; g.fillRect(0,0,256,70);
+  return ctex(c); })();
+const aoTex = (()=>{ const c=mk(4,128),g=c.getContext('2d'); const gr=g.createLinearGradient(0,0,0,128); gr.addColorStop(0,'rgba(0,0,0,.28)'); gr.addColorStop(.4,'rgba(0,0,0,.08)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.fillRect(0,0,4,128); return ctex(c); })();
+const aoTexH = (()=>{ const c=mk(128,4),g=c.getContext('2d'); const gr=g.createLinearGradient(0,0,128,0); gr.addColorStop(0,'rgba(0,0,0,.24)'); gr.addColorStop(.4,'rgba(0,0,0,.07)'); gr.addColorStop(1,'rgba(0,0,0,0)'); g.fillStyle=gr; g.fillRect(0,0,128,4); return ctex(c); })();
+SHARED.add(scallopTex); SHARED.add(aoTex); SHARED.add(aoTexH);
+function ceilingTexture(color){
+  const S=512,c=mk(S,S),g=c.getContext('2d'); g.fillStyle=color; g.fillRect(0,0,S,S);
+  g.fillStyle='rgba(0,0,0,.07)'; g.fillRect(0,0,S,2); g.fillRect(0,0,2,S);
+  const t=ctex(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; return t;
+}
+function ventTexture(){
+  const c=mk(256,256),g=c.getContext('2d'); g.fillStyle='#ededeb'; g.fillRect(0,0,256,256);
+  g.fillStyle='#cfcfcc'; g.fillRect(28,28,200,200);
+  for(let y=40;y<220;y+=12){ g.fillStyle='#3a3a38'; g.fillRect(40,y,176,5); g.fillStyle='#f7f7f5'; g.fillRect(40,y+5,176,2); }
+  return ctex(c);
+}
+
+let room=null, mirror=null, reflectT=null, LIGHTS=null;
+function lightVals(){ const sp=CFG.space||{}; return { room: sp.room_light!=null?+sp.room_light:25, art: sp.art_light!=null?+sp.art_light:85 }; }
+function applyLighting(){
+  if (!LIGHTS) return;
+  const v=lightVals(), L=v.room/100, S=v.art/100;
+  LIGHTS.hemi.intensity=.015+.72*L; LIGHTS.amb.intensity=.005+.24*L;
+  LIGHTS.points.forEach(l=>l.intensity=.01+.36*L);
+  LIGHTS.pools.forEach(m=>m.opacity=.12+.6*S);
+  const art=.62+.38*S; works.forEach(w=>{ if(w._face) w._face.color.setRGB(art,art,art); });
+  renderer.toneMappingExposure=.92+.16*S;
+}
+function scheduleReflect(){ clearTimeout(reflectT); reflectT=setTimeout(buildReflection,60); }
+function buildReflection(){
+  if (!world || !room) return;
+  if (mirror){ world.remove(mirror); mirror=null; }
+  if (!ROOM.reflect) return;
+  mirror=room.clone(true); mirror.scale.y=-1; mirror.traverse(o=>{ o.raycast=()=>{}; });
+  world.add(mirror);
+}
+
+function buildScene(resetView){
+  disposeWorld(); mirror=null;
+  world=new THREE.Group(); scene.add(world);
+  room=new THREE.Group(); world.add(room);
+  artMeshes=[];
+  const sp=Object.assign({wall:'#f4f4f2',floor:'#c9c8c4',floorStyle:'polished',ceiling:'#f3f3f1',text:'#24221f',gap:1.5,height:3.5,reflect:true}, CFG.space||{});
+  works = (CFG.works||[]).map((w,i)=>Object.assign(w,{_i:i,_w:Math.max(.1,(+w.width_cm||100)/100),_h:Math.max(.1,(+w.height_cm||+w.width_cm||100)/100)}));
+  const maxH=Math.max(1,...works.map(w=>w._h));
+  const H=Math.max(sp.height, maxH+1.5), F=3.2, M=1.4, gap=+sp.gap||1.5;
+  const sumW=works.reduce((a,w)=>a+w._w,0);
+  let W, D, plan=null;
+  if (works.length<=4){ W=Math.max(9, sumW+gap*(works.length+1)+2*M); D=11; plan=layout(works,W,D,F,M,gap); }
+  else {
+    W=Math.max(9,Math.min(14,(sumW+gap*works.length)/4+2*M));
+    for (D=10; D<140 && !(plan=layout(works,W,D,F,M,gap)); D+=.5);
+  }
+  if (!plan) plan=[];
+  const reflect = sp.reflect!==false && sp.floorStyle!=='wood';
+  ROOM={W,D,H,reflect};
+  bounds={minX:-W/2+.55,maxX:W/2-.55,minZ:-D+.55,maxZ:-.55};
+
+  /* walls, ceiling, floor */
+  const wallMat=new THREE.MeshStandardMaterial({color:sp.wall,map:wallTexture(),roughness:.95,metalness:0});
+  const addPlane=(mat,w,h,x,y,z,ry,rx)=>{ const m=new THREE.Mesh(planeGeo,mat); m.scale.set(w,h,1); m.position.set(x,y,z); if(ry) m.rotation.y=ry; if(rx) m.rotation.x=rx; room.add(m); return m; };
+  addPlane(wallMat,D,H,-W/2,H/2,-D/2,Math.PI/2);
+  addPlane(wallMat,D,H, W/2,H/2,-D/2,-Math.PI/2);
+  addPlane(wallMat,W,H,0,H/2,-D,0);
+  addPlane(wallMat,W,H,0,H/2,0,Math.PI);
+  const ct=ceilingTexture(sp.ceiling); ct.repeat.set(W/1.2,D/1.2);
+  addPlane(new THREE.MeshStandardMaterial({map:ct,roughness:1}),W,D,0,H,-D/2,0,Math.PI/2);
+  const ft=floorTexture(sp.floorStyle==='wood'?'wood':'concrete',sp.floor); ft.repeat.set(W/5,D/5);
+  floorMesh=new THREE.Mesh(planeGeo,new THREE.MeshStandardMaterial({map:ft,roughness:reflect?.3:.55,metalness:0,transparent:reflect,opacity:reflect?.85:1}));
+  floorMesh.scale.set(W,D,1); floorMesh.rotation.x=-Math.PI/2; floorMesh.position.set(0,0,-D/2); floorMesh.renderOrder=10; world.add(floorMesh);
+
+  /* soft corner shading (ambient occlusion) */
+  const aoMat=new THREE.MeshBasicMaterial({map:aoTex,transparent:true,depthWrite:false,toneMapped:false});
+  const aoMatUp=aoMat.clone(); aoMatUp.map=aoTex;
+  const ao=(w,h,x,y,z,ry,flip)=>{ const m=addPlane(aoMat,w,h,x,y,z,ry); if(flip) m.scale.y*=-1; };
+  [[D,-W/2+.003,-D/2,Math.PI/2],[D,W/2-.003,-D/2,-Math.PI/2],[W,0,-D+.003,0],[W,0,-.003,Math.PI]].forEach(([len,x,z,ry])=>{
+    ao(len,.55,x,H-.275,z,ry,false);      // under the ceiling
+    ao(len,.22,x,.11,z,ry,true);          // above the floor
+  });
+  const aoMatH=new THREE.MeshBasicMaterial({map:aoTexH,transparent:true,depthWrite:false,toneMapped:false});
+  const vao=(x,z,ry,flip)=>{ const m=new THREE.Mesh(planeGeo,aoMatH); m.scale.set(flip?-.45:.45,H,1); m.position.set(x,H/2,z); m.rotation.y=ry; room.add(m); };
+  /* vertical corners (gradient runs away from the corner) */
+  const e=.225;
+  vao(-W/2+.003,-D+e, Math.PI/2,false); vao(-W/2+.003,-e, Math.PI/2,true);
+  vao( W/2-.003,-D+e,-Math.PI/2,true);  vao( W/2-.003,-e,-Math.PI/2,false);
+  vao(-W/2+e,-D+.003,0,false); vao(W/2-e,-D+.003,0,true);
+  vao(-W/2+e,-.003,Math.PI,true); vao(W/2-e,-.003,Math.PI,false);
+  /* white baseboard */
+  const bbMat=new THREE.MeshStandardMaterial({color:'#fbfbfa',roughness:.5});
+  [[W,0,-D+.008,0],[W,0,-.008,0],[D,-W/2+.008,-D/2,1],[D,W/2-.008,-D/2,1]].forEach(([len,x,z,rot])=>{ const b=new THREE.Mesh(boxGeo,bbMat); b.scale.set(len,.1,.016); b.position.set(x,.05,z); if(rot) b.rotation.y=Math.PI/2; room.add(b); });
+
+  /* entrance: closed white door */
+  const doorMat=new THREE.MeshStandardMaterial({color:'#f1f1ef',roughness:.6});
+  const door=new THREE.Mesh(boxGeo,doorMat); door.scale.set(1.05,2.25,.04); door.position.set(0,1.125,-.02); room.add(door);
+  const frameMat=new THREE.MeshStandardMaterial({color:'#e2e2df',roughness:.6});
+  [[-.56,1.15,.06,2.3],[.56,1.15,.06,2.3],[0,2.28,1.18,.06]].forEach(([x,y,w,h])=>{ const f=new THREE.Mesh(boxGeo,frameMat); f.scale.set(w,h,.05); f.position.set(x,y,-.025); room.add(f); });
+  const handle=new THREE.Mesh(boxGeo,new THREE.MeshStandardMaterial({color:'#9a9a96',metalness:.6,roughness:.3})); handle.scale.set(.14,.025,.04); handle.position.set(-.38,1.05,-.06); room.add(handle);
+
+  /* ceiling details: downlights + air-conditioning vents */
+  const dlMat=new THREE.MeshBasicMaterial({color:'#fffdf4',toneMapped:false});
+  const dlRim=new THREE.MeshStandardMaterial({color:'#dcdcd8',roughness:.6});
+  const dlGeo=new THREE.CircleGeometry(.075,24), rimGeo=new THREE.RingGeometry(.075,.1,24);
+  for (let z=-2.4; z>-D+1.5; z-=3.2) [0].forEach(x=>{
+    const a=new THREE.Mesh(dlGeo,dlMat); a.rotation.x=Math.PI/2; a.position.set(x-W*.12,H-.004,z); room.add(a);
+    const r=new THREE.Mesh(rimGeo,dlRim); r.rotation.x=Math.PI/2; r.position.set(x-W*.12,H-.003,z); room.add(r);
+  });
+  const ventMat=new THREE.MeshStandardMaterial({map:ventTexture(),roughness:.9});
+  for (let z=-D*.3; z>-D+1; z-=D*.42){ const v=new THREE.Mesh(boxGeo,ventMat); v.scale.set(.95,.035,.95); v.position.set(W*.08,H-.017,z); room.add(v); }
+
+  /* track rails (U-shape along the three exhibition walls) */
+  const inset=1.25, railY=H-.02;
+  const railMat=new THREE.MeshStandardMaterial({color:'#2b2b2a',roughness:.5,metalness:.4});
+  const rail=(x,z,len,alongZ)=>{ const r=new THREE.Mesh(boxGeo,railMat); r.scale.set(alongZ?.035:len,.03,alongZ?len:.035); r.position.set(x,railY,z); room.add(r); };
+  rail(-W/2+inset,-(D-inset)/2-.4,D-inset-.8,true);
+  rail( W/2-inset,-(D-inset)/2-.4,D-inset-.8,true);
+  rail(0,-D+inset,W-2*inset,false);
+
+  /* lights */
+  LIGHTS={hemi:new THREE.HemisphereLight(0xffffff,0xcfcac0,.5), amb:new THREE.AmbientLight(0xffffff,.2), points:[], pools:[]};
+  world.add(LIGHTS.hemi); world.add(LIGHTS.amb);
+  const step=Math.max(4.5,D/4);
+  for (let z=-step/2; z>-D; z-=step){ const l=new THREE.PointLight(0xfff7ec,.28,0,1); l.position.set(0,H-.4,z); world.add(l); LIGHTS.points.push(l); }
+
+  /* entrance wall text */
+  const ex=CFG.exhibition||{}, ar=CFG.artist||{};
+  const half=W/2-1.15;
+  const tW=Math.min(half-.3,3.6);
+  addWallText([
+    {text:ex.title||'',font:'600 92px "Noto Serif KR"',lh:118},
+    {text:ex.subtitle||'',font:'400 44px "Noto Serif KR"',lh:66,after:56},
+    {text:[ar.name,ar.name_en].filter(Boolean).join('   '),font:'500 38px "Noto Sans KR"',lh:54},
+    {text:[ex.period,ex.venue].filter(Boolean).join('   '),font:'400 30px "Noto Sans KR"',lh:46,color:shade(sp.text,.3)}
+  ], tW, .95+tW/2+.2, 2.55, sp.text);
+  const sW=Math.min(half-.3,3);
+  addWallText([{text:'Artist Statement',font:'500 26px "Noto Sans KR"',lh:40,after:16,color:shade(sp.text,.35)}].concat((ex.statement||[]).map(p=>({text:p,font:'400 30px "Noto Serif KR"',lh:54,after:26}))), sW, -(.95+sW/2+.2), 2.45, sp.text);
+
+  /* fixtures */
+  const headGeo=new THREE.CylinderGeometry(.05,.042,.17,18); headGeo.rotateX(Math.PI/2);
+  const stemGeo=new THREE.CylinderGeometry(.01,.01,.13,8);
+  const lensGeo=new THREE.CircleGeometry(.04,18);
+  const fixMat=new THREE.MeshStandardMaterial({color:'#ecebe8',roughness:.35,metalness:.25});
+  const lensMat=new THREE.MeshBasicMaterial({color:'#fff8e2',toneMapped:false});
+  const fixture=(x,z,target)=>{
+    const g=new THREE.Group(); g.position.set(x,railY-.015,z); room.add(g);
+    const st=new THREE.Mesh(stemGeo,fixMat); st.position.y=-.065; g.add(st);
+    const hd=new THREE.Group(); hd.position.y=-.15; g.add(hd);
+    hd.add(new THREE.Mesh(headGeo,fixMat));
+    const ln=new THREE.Mesh(lensGeo,lensMat); ln.position.z=.086; hd.add(ln);
+    g.updateMatrixWorld(true); hd.lookAt(target);
+  };
+
+  /* artworks */
+  works.forEach((w,i)=>{
+    const pl=plan[i]; if(!pl) return;
+    let px,pz,n;
+    if (pl.seg===0){ px=-W/2; pz=-F-pl.s; n=new THREE.Vector3(1,0,0); }
+    else if (pl.seg===1){ px=-W/2+M+pl.s; pz=-D; n=new THREE.Vector3(0,0,1); }
+    else { px=W/2; pz=-D+M+pl.s; n=new THREE.Vector3(-1,0,0); }
+    const cy=Math.max(1.5,w._h/2+.4);
+    const g=new THREE.Group(); g.position.set(px,cy,pz); g.lookAt(px+n.x,cy,pz+n.z); room.add(g);
+    w._group=g; w._n=n; w._cy=cy; w._wall=new THREE.Vector3(px,0,pz); w._H=H;
+    const pool=new THREE.Mesh(planeGeo,new THREE.MeshBasicMaterial({map:scallopTex,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:.55,toneMapped:false}));
+    g.add(pool); w._pool=pool; LIGHTS.pools.push(pool.material);
+    const sh=new THREE.Mesh(planeGeo,new THREE.MeshBasicMaterial({map:shadowTex,transparent:true,depthWrite:false,opacity:.5}));
+    g.add(sh); w._shadow=sh;
+    const depth=+(w.depth_cm||4)/100;
+    const side=new THREE.MeshStandardMaterial({color:'#e9e7e2',roughness:.85});
+    const face=new THREE.MeshBasicMaterial({toneMapped:false});
+    const box=new THREE.Mesh(boxGeo,[side,side,side,side,face,side]);
+    box.position.z=.012+depth/2; box.userData.i=i; g.add(box);
+    w._box=box; w._face=face; w._depth=depth;
+    artMeshes.push(box);
+    const pq=new THREE.Mesh(planeGeo,new THREE.MeshBasicMaterial({map:ctex(plaqueCanvas(w)),toneMapped:false}));
+    g.add(pq); w._plaque=pq;
+    // track-light head(s) aimed at the work
+    const tgt=new THREE.Vector3(px+n.x*.05,cy+w._h*.15,pz+n.z*.05);
+    const fx=px+n.x*inset, fz=pz+n.z*inset;
+    const tang=new THREE.Vector3(n.z,0,-n.x);
+    if (w._w>1.3){ [-.28,.28].forEach(o=>fixture(fx+tang.x*w._w*o,fz+tang.z*w._w*o,tgt.clone().addScaledVector(tang,w._w*o))); }
+    else fixture(fx,fz,tgt);
+    sizeWork(w);
+    const ph=placeholderCanvas(w,i); setFace(w, ctex(ph)); w._thumb = thumbFromCanvas(ph);
+    const src = w._localUrl || w.image;
+    if (src) loadImage(w, src, false);
+  });
+  applyLighting();
+  buildReflection();
+  if (resetView){ view.pos.set(0,EYE,-2.2); view.yaw=0; view.pitch=-.03; focusIndex=-1; anim=null; hideInfo(); }
+  else clampPos(view.pos);
+}
+function addWallText(blocks,widthM,cx,topY,color){
+  const ppm=260, Wp=Math.round(widthM*ppm);
+  const meas=mk(4,4).getContext('2d'); const lines=[]; let y=0;
+  blocks.forEach(b=>{ if(!b.text) return; meas.font=b.font; wrap(meas,b.text,Wp).forEach(t=>{ y+=b.lh; lines.push({t,y,font:b.font,color:b.color||color}); }); y+=(b.after||0); });
+  if(!lines.length) return;
+  const c=mk(Wp,Math.ceil(y+24)), g=c.getContext('2d');
+  lines.forEach(l=>{ g.font=l.font; g.fillStyle=l.color; g.fillText(l.t,0,l.y); });
+  const m=new THREE.Mesh(planeGeo,new THREE.MeshBasicMaterial({map:ctex(c),transparent:true,depthWrite:false,toneMapped:false}));
+  const hM=c.height/ppm; m.scale.set(widthM,hM,1); m.rotation.y=Math.PI; m.position.set(cx,topY-hM/2,-.006); room.add(m);
+}
+function sizeWork(w){
+  w._box.scale.set(w._w,w._h,w._depth);
+  const H=w._H||3.5, top=H-.18, bottom=w._cy-w._h/2-.45;
+  w._pool.scale.set(Math.max(1.3,w._w*1.35+.55),top-bottom,1);
+  w._pool.position.set(0,(top+bottom)/2-w._cy,.004);
+  w._shadow.scale.set(w._w*1.12,w._h*1.12,1);
+  w._shadow.position.set(.0,-.07,.008);
+  w._plaque.scale.set(.3,.16,1);
+  w._plaque.position.set(w._w/2+.4,1.3-w._cy,.006);
+  scheduleReflect();
+}
+function setFace(w,tex){ if (w._face.map && !SHARED.has(w._face.map)) w._face.map.dispose(); w._face.map=tex; w._face.needsUpdate=true; }
+function thumbFromCanvas(cv){ const s=260/Math.max(cv.width,cv.height), c=mk(cv.width*s,cv.height*s); c.getContext('2d').drawImage(cv,0,0,c.width,c.height); return c.toDataURL('image/jpeg',.82); }
+function loadImage(w,url,announce){
+  return new Promise(res=>{
+    loader.load(url, t=>{
+      t.encoding=THREE.sRGBEncoding; t.anisotropy=ANISO;
+      if (!w._face) return res(false);
+      const ar=t.image.width/t.image.height;
+      w._h = w._w/ar; w.height_cm = Math.round(w._w/ar*100);
+      if (!w.size_fixed) w.size = `${w.width_cm}×${w.height_cm}cm`;
+      sizeWork(w); setFace(w,t); w._thumb=url;
+      renderList(); res(true);
+    }, undefined, ()=>{ if(announce) toast('이미지를 불러오지 못했어요: '+(w.title||'')); res(false); });
+  });
+}
+
+/* ---------------- camera movement ---------------- */
+function clampPos(p){ p.x=Math.min(bounds.maxX,Math.max(bounds.minX,p.x)); p.z=Math.min(bounds.maxZ,Math.max(bounds.minZ,p.z)); return p; }
+function animateTo(pos,yaw,pitch){
+  const d=view.pos.distanceTo(pos), dur=THREE.MathUtils.clamp(.7+d*.13,.75,2.3);
+  let dy=yaw-view.yaw; dy=((dy+Math.PI)%(2*Math.PI)+2*Math.PI)%(2*Math.PI)-Math.PI;
+  anim={t0:performance.now(),dur:dur*1000,fp:view.pos.clone(),tp:pos.clone(),fy:view.yaw,ty:view.yaw+dy,fpi:view.pitch,tpi:pitch};
+}
+function focusWork(i){
+  if (!works.length) return;
+  i=((i%works.length)+works.length)%works.length; focusIndex=i;
+  const w=works[i]; if(!w._group) return;
+  const c=new THREE.Vector3(w._wall.x,w._cy,w._wall.z);
+  const size=Math.max(w._w,w._h*.95), dist=THREE.MathUtils.clamp(size*1.2+.85,1.6,7);
+  const pos=clampPos(c.clone().addScaledVector(w._n,dist)); pos.y=EYE;
+  // shift a little left so the info panel doesn't cover the work on wide screens
+  const dx=c.x-pos.x, dz=c.z-pos.z;
+  animateTo(pos, Math.atan2(-dx,-dz), Math.atan2(c.y-EYE, Math.hypot(dx,dz)));
+  showInfo(i);
+}
+
+const keys=new Set();
+addEventListener('keydown',e=>{
+  if (/INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+  if (e.key==='Escape'){ hideInfo(); document.querySelectorAll('.drawer.open').forEach(d=>d.classList.remove('open')); return; }
+  if (!$('#hud').classList.contains('on')) return;
+  if (focusIndex>=0 && $('#info').classList.contains('show') && (e.key==='.'||e.key==='PageDown')){ focusWork(focusIndex+1); return; }
+  keys.add(e.code);
+  if (/Arrow|Key[WASD]/.test(e.code)) e.preventDefault();
+});
+addEventListener('keyup',e=>keys.delete(e.code));
+addEventListener('blur',()=>keys.clear());
+
+const ray=new THREE.Raycaster(), ndc=new THREE.Vector2();
+function pick(e){
+  const r=canvas.getBoundingClientRect(); ndc.set(((e.clientX-r.left)/r.width)*2-1, -((e.clientY-r.top)/r.height)*2+1);
+  ray.setFromCamera(ndc,camera);
+  const hit=ray.intersectObjects(artMeshes.concat(floorMesh?[floorMesh]:[]),false)[0];
+  return hit||null;
+}
+let drag=null;
+canvas.addEventListener('pointerdown',e=>{ if(!e.isPrimary) return; drag={x:e.clientX,y:e.clientY,lx:e.clientX,ly:e.clientY,moved:false}; try{canvas.setPointerCapture(e.pointerId);}catch(_){} });
+canvas.addEventListener('pointermove',e=>{
+  if (!e.isPrimary) return;
+  if (drag){
+    const dx=e.clientX-drag.lx, dy=e.clientY-drag.ly; drag.lx=e.clientX; drag.ly=e.clientY;
+    if (Math.abs(e.clientX-drag.x)+Math.abs(e.clientY-drag.y)>6) drag.moved=true;
+    if (drag.moved){ anim=null; const s=isTouch?.0055:.0042; view.yaw+=dx*s; view.pitch=THREE.MathUtils.clamp(view.pitch+dy*s*.85,-1.05,1.05); }
+  } else if (!isTouch){ const h=pick(e); canvas.style.cursor = h && h.object!==floorMesh ? 'pointer' : 'grab'; }
+});
+canvas.addEventListener('pointerup',e=>{
+  if (!e.isPrimary || !drag) return;
+  const moved=drag.moved; drag=null; if (moved) return;
+  const h=pick(e); if(!h) return;
+  if (h.object===floorMesh){
+    const to=clampPos(new THREE.Vector3(h.point.x,EYE,h.point.z));
+    hideInfo(); animateTo(to,view.yaw,THREE.MathUtils.clamp(view.pitch,-.2,.2));
+  } else focusWork(h.object.userData.i);
+});
+canvas.addEventListener('pointercancel',()=>drag=null);
+canvas.addEventListener('wheel',e=>{ e.preventDefault(); anim=null; const f=new THREE.Vector3(-Math.sin(view.yaw),0,-Math.cos(view.yaw)); view.pos.addScaledVector(f,-e.deltaY*.0035); clampPos(view.pos); },{passive:false});
+
+let last=performance.now();
+function tick(now){
+  const dt=Math.min(.05,(now-last)/1000); last=now;
+  if (anim){
+    let t=Math.min(1,(now-anim.t0)/anim.dur); const e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+    view.pos.lerpVectors(anim.fp,anim.tp,e); view.yaw=anim.fy+(anim.ty-anim.fy)*e; view.pitch=anim.fpi+(anim.tpi-anim.fpi)*e;
+    if (t>=1) anim=null;
+  }
+  if (keys.size){
+    const fw=(keys.has('KeyW')||keys.has('ArrowUp')?1:0)-(keys.has('KeyS')||keys.has('ArrowDown')?1:0);
+    const st=(keys.has('KeyD')?1:0)-(keys.has('KeyA')?1:0);
+    const turn=(keys.has('ArrowLeft')?1:0)-(keys.has('ArrowRight')?1:0);
+    if (fw||st||turn){ anim=null; if($('#info').classList.contains('show')) hideInfo(); }
+    view.yaw+=turn*dt*1.6;
+    const sp=(keys.has('ShiftLeft')||keys.has('ShiftRight')?4.6:2.5)*dt;
+    const f=new THREE.Vector3(-Math.sin(view.yaw),0,-Math.cos(view.yaw)), r=new THREE.Vector3(Math.cos(view.yaw),0,-Math.sin(view.yaw));
+    view.pos.addScaledVector(f,fw*sp).addScaledVector(r,st*sp); clampPos(view.pos);
+  }
+  camera.position.copy(view.pos); camera.rotation.set(view.pitch,view.yaw,0);
+  renderer.render(scene,camera);
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+/* ---------------- editor ---------------- */
+let pickTarget=null, dirty=false;
+function setDirty(v){ dirty=v; const b=$('#edSave'); if(b){ b.disabled=!v; b.textContent=v?'저장하기':'저장됨'; } }
+function renderEdit(){
+  const ex=CFG.exhibition||{}, ar=CFG.artist||{};
+  const permanent = caps.canEdit;
+  let h = `<div class="ed-status ${permanent?'ok':''}">${permanent
+    ? '<b>저장하면 모든 관람객에게 그대로 반영돼요.</b><br>작품 칸을 누르거나 이미지를 끌어다 놓아 교체하세요. 글자도 바로 고칠 수 있어요.'
+    : '<b>미리보기 모드예요.</b> 여기서 바꾼 내용은 이 화면에서만 보여요. 전시장 주인으로 Claude에 로그인한 상태에서 열면 바로 저장할 수 있어요. 또는 아래 \'설정 복사\'로 내용을 복사해 Claude에게 보내주세요.'}</div>`;
+  h += `<div class="ed-sec"><label>전시 제목</label><input data-k="exhibition.title" value="${esc(ex.title)}"><label>부제</label><input data-k="exhibition.subtitle" value="${esc(ex.subtitle)}"><label>기간 · 장소</label><div class="fld"><input data-k="exhibition.period" value="${esc(ex.period)}" placeholder="기간"><input data-k="exhibition.venue" value="${esc(ex.venue)}" placeholder="장소"></div><label>작가 이름 (한글 · 영문)</label><div class="fld"><input data-k="artist.name" value="${esc(ar.name)}"><input data-k="artist.name_en" value="${esc(ar.name_en)}"></div><label>작가노트 (문단은 빈 줄로 구분)</label><textarea data-k="exhibition.statement" rows="6">${esc((ex.statement||[]).join('\n\n'))}</textarea></div>`;
+  works.forEach((w,i)=>{
+    h += `<div class="ed-item" data-i="${i}"><div class="im" data-pick="${i}" style="background-image:url('${w._thumb||''}')"><small>이미지 교체</small></div><div><div class="fld">
+      <input class="full" data-w="title" value="${esc(w.title)}" placeholder="제목">
+      <input class="full" data-w="title_en" value="${esc(w.title_en)}" placeholder="영문 제목">
+      <input data-w="year" value="${esc(w.year)}" placeholder="연도">
+      <input data-w="medium" value="${esc(w.medium)}" placeholder="재료">
+      <input data-w="width_cm" type="number" min="5" value="${esc(w.width_cm)}" placeholder="가로 cm">
+      <input data-w="height_cm" type="number" min="5" value="${esc(w.height_cm)}" placeholder="세로 cm">
+      <textarea data-w="note" placeholder="작품 설명 (선택)">${esc(w.note)}</textarea></div>
+      <div class="ed-row"><button class="btn" data-act="up">↑</button><button class="btn" data-act="down">↓</button><button class="btn" data-act="go">보러 가기</button><button class="btn" data-act="del">삭제</button></div></div></div>`;
+  });
+  h += `<div class="ed-row" style="margin-top:14px"><button class="btn" id="edAdd">+ 작품 추가</button></div>
+  <div class="sticky-save">${permanent?`<button class="btn dark" id="edSave" ${dirty?'':'disabled'}>${dirty?'저장하기':'저장됨'}</button>`:''}<button class="btn" id="edCopy">설정 복사</button>${permanent?'<button class="btn ghost" id="edReset">처음 설정으로 되돌리기</button>':''}</div>
+  <textarea id="copybox" readonly></textarea>`;
+  const body=$('#editBody'); body.innerHTML=h;
+
+  body.querySelectorAll('[data-k]').forEach(inp=>inp.oninput=()=>{
+    const [a,b]=inp.dataset.k.split('.'); CFG[a]=CFG[a]||{};
+    CFG[a][b] = b==='statement' ? inp.value.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean) : inp.value;
+    renderIntroText(); setDirty(true); scheduleRebuild();
+  });
+  body.querySelectorAll('.ed-item').forEach(row=>{
+    const i=+row.dataset.i, w=works[i];
+    row.querySelectorAll('[data-w]').forEach(inp=>inp.oninput=()=>{
+      const k=inp.dataset.w;
+      if (k==='width_cm'||k==='height_cm'){ const v=+inp.value; if(!(v>=5)) return; w[k]=v; w.size=`${w.width_cm}×${w.height_cm}cm`; w.size_fixed=true; setDirty(true); scheduleRebuild(); return; }
+      w[k]=inp.value; setDirty(true);
+      if (w._plaque){ w._plaque.material.map.dispose(); w._plaque.material.map=ctex(plaqueCanvas(w)); w._plaque.material.needsUpdate=true; }
+      if (focusIndex===i) showInfo(i); renderList();
+    });
+    const im=row.querySelector('.im');
+    im.onclick=()=>{ pickTarget=i; $('#filePick').value=''; $('#filePick').click(); };
+    im.ondragover=e=>{ e.preventDefault(); im.classList.add('drag'); };
+    im.ondragleave=()=>im.classList.remove('drag');
+    im.ondrop=e=>{ e.preventDefault(); im.classList.remove('drag'); const f=e.dataTransfer.files[0]; if(f) replaceImage(i,f); };
+    row.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{
+      const act=b.dataset.act, L=CFG.works;
+      if (act==='go'){ focusWork(i); return; }
+      if (act==='del'){ if(b.dataset.sure!=='1'){ b.dataset.sure='1'; b.textContent='정말 삭제?'; return; } L.splice(i,1); }
+      if (act==='up' && i>0) [L[i-1],L[i]]=[L[i],L[i-1]];
+      if (act==='down' && i<L.length-1) [L[i+1],L[i]]=[L[i],L[i+1]];
+      setDirty(true); buildScene(false); renderList(); renderEdit();
+    });
+  });
+  $('#edAdd').onclick=()=>{ const n=CFG.works.length+1; CFG.works.push({title:'새 작품 '+n,title_en:'',year:String(new Date().getFullYear()),medium:'',width_cm:100,height_cm:100,size:'100×100cm',note:'',image:'',placeholder:{style:'fields',seed:n*7}}); setDirty(true); buildScene(false); renderList(); renderEdit(); focusWork(CFG.works.length-1); };
+  $('#edCopy').onclick=async()=>{
+    const txt=JSON.stringify(cleanCfg(CFG),null,2);
+    try{ await navigator.clipboard.writeText(txt); toast('설정을 복사했어요. Claude에게 붙여넣어 보내주세요.'); }
+    catch(e){ const box=$('#copybox'); box.style.display='block'; box.value=txt; box.focus(); box.select(); toast('아래 칸의 내용을 전체 선택해 복사해 주세요.'); }
+  };
+  if ($('#edSave')) $('#edSave').onclick=saveAll;
+  if ($('#edReset')) $('#edReset').onclick=async e=>{
+    const b=e.currentTarget; if(b.dataset.sure!=='1'){ b.dataset.sure='1'; b.textContent='정말 되돌릴까요? 저장한 내용이 지워져요'; return; }
+    try{ await caps.db.doc('exhibitions/'+CUR_ID).delete(); }catch(_){}
+    dirty=false; toast('처음 설정으로 되돌렸어요.'); route();
+  };
+}
+function renderIntroText(){ const ex=CFG.exhibition||{}, ar=CFG.artist||{}; $('#bTitle').textContent=ex.title+(ex.subtitle?': '+ex.subtitle:''); $('#bArtist').textContent=[ar.name,ar.name_en].filter(Boolean).join(' · '); renderNote(); }
+let rbT; function scheduleRebuild(){ clearTimeout(rbT); rbT=setTimeout(()=>{ buildScene(false); renderList(); },600); }
+
+$('#filePick').onchange=e=>{ const f=e.target.files[0]; if(f!=null && pickTarget!=null) replaceImage(pickTarget,f); };
+async function replaceImage(i,file){
+  if (!/^image\//.test(file.type)){ toast('이미지 파일만 올릴 수 있어요.'); return; }
+  const w=CFG.works[i];
+  const local=URL.createObjectURL(file);
+  w._localUrl=local; w.size_fixed=false;
+  toast('이미지를 바꾸는 중…',1500);
+  await loadImage(works[i],local,true);
+  setDirty(true);
+  if (caps.canEdit && caps.assets){
+    try {
+      toast('이미지를 올리는 중…',8000);
+      const up=await caps.assets.upload(file);
+      w.image=up.url; w.image_id=up.id;
+      toast('이미지를 올렸어요. \'저장하기\'를 누르면 반영돼요.');
+    } catch(err){ toast('이미지를 서버에 올리지 못했어요. 잠시 후 다시 시도해 주세요.'); }
+  } else {
+    w.image = 'images/'+CUR_ID+'/'+file.name;
+  }
+  renderEdit();
+}
+async function saveAll(){
+  if (!caps.canEdit) return;
+  const b=$('#edSave'); b.disabled=true; b.textContent='저장하는 중…';
+  try{
+    const data=cleanCfg(CFG);
+    await caps.db.doc('exhibitions/'+CUR_ID).set({config:JSON.stringify(data),updatedAt:Date.now()});
+    setDirty(false); toast('저장했어요. 이제 모든 관람객에게 이렇게 보여요.');
+  }catch(err){ b.disabled=false; b.textContent='저장하기'; toast('저장하지 못했어요. 로그인 상태를 확인하고 다시 시도해 주세요.'); }
+}
+addEventListener('beforeunload',e=>{ if(dirty && caps.canEdit){ e.preventDefault(); e.returnValue=''; } });
+
+/* ---------------- boot ---------------- */
+addEventListener('hashchange',()=>{ if(REG) route(); });
+(async()=>{
+  try { REG=await loadJSON('exhibitions/index.json'); await route(); }
+  catch(e){ console.error(e); showErr('전시 정보를 불러오지 못했어요. 잠시 후 새로고침해 주세요.'); }
+})();
+})();
+</script>
+</body>
+</html>
