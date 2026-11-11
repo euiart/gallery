@@ -34,9 +34,11 @@
     "floorStyle": "concrete",
     "text": "#22201d",
     "gap": 1.5,
-    "room_light": 40,
+    "room_light": 35,
     "art_light": 50,
-    "art_linked": false
+    "art_linked": false,
+    "theme": "concrete",
+    "floorKind": "polished"
   },
   "works": [
     {
