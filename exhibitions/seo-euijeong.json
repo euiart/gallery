@@ -62,7 +62,12 @@
         ],
         "accents": []
       },
-      "id": "w01"
+      "id": "w01",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 01"
+        }
+      }
     },
     {
       "title": "얽힘 02",
@@ -89,7 +94,12 @@
           "#9cc0f0"
         ]
       },
-      "id": "w02"
+      "id": "w02",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 02"
+        }
+      }
     },
     {
       "title": "얽힘 03",
@@ -116,7 +126,12 @@
           "#e9c46a"
         ]
       },
-      "id": "w03"
+      "id": "w03",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 03"
+        }
+      }
     },
     {
       "title": "얽힘 04",
@@ -143,7 +158,12 @@
           "#b9d7c4"
         ]
       },
-      "id": "w04"
+      "id": "w04",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 04"
+        }
+      }
     },
     {
       "title": "얽힘 05",
@@ -170,7 +190,12 @@
           "#3b3b3b"
         ]
       },
-      "id": "w05"
+      "id": "w05",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 05"
+        }
+      }
     },
     {
       "title": "얽힘 06",
@@ -197,7 +222,12 @@
           "#f0a8b8"
         ]
       },
-      "id": "w06"
+      "id": "w06",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 06"
+        }
+      }
     },
     {
       "title": "얽힘 07",
@@ -224,7 +254,12 @@
           "#c6322c"
         ]
       },
-      "id": "w07"
+      "id": "w07",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 07"
+        }
+      }
     },
     {
       "title": "얽힘 08",
@@ -251,7 +286,12 @@
           "#8fd6c8"
         ]
       },
-      "id": "w08"
+      "id": "w08",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 08"
+        }
+      }
     },
     {
       "title": "얽힘 09",
@@ -278,7 +318,12 @@
           "#1c2a46"
         ]
       },
-      "id": "w09"
+      "id": "w09",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 09"
+        }
+      }
     },
     {
       "title": "얽힘 10",
@@ -305,8 +350,61 @@
           "#e8d26a"
         ]
       },
-      "id": "w10"
+      "id": "w10",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 10"
+        }
+      }
     }
   ],
-  "presets": []
+  "presets": [],
+  "i18n": {
+    "en": {
+      "exhibition": {
+        "type": "Invitational Solo Exhibition",
+        "title": "The Variability of Relations",
+        "subtitle": "A Pictorial Realization of Dependent Origination and the Rhizome",
+        "venue": "euiart online gallery",
+        "offline": {
+          "venue": "KMJ Art Gallery, 2F"
+        },
+        "statement": [
+          "No one in this world can exist on their own.\nWe are all constantly forming relationships, influencing one another, and simply changing.",
+          "We live in a world more densely connected than ever, yet our sense of isolation only deepens. Perhaps it is because we think of ourselves as beings standing apart. “The Variability of Relations” begins with this question. Setting aside a fixed ‘self’, it seeks to look at existence anew, as something that arises within relationships.",
+          "This way of seeing touches on two strands of thought. The Buddhist idea of dependent origination says, “Because this exists, that exists.” Nothing arises on its own; all things lean on one another and stay only for a while. Deleuze and Guattari’s rhizome, too, has neither centre nor beginning, connecting with others from any point as it spreads. Both point to the same place: the ‘self’ is not a fixed entity but a single knot woven by relationships.",
+          "“Entanglement” spreads that knot across the picture plane. The countless intersecting lines are the ever-changing flow of relationships. Just as a rhizome, when cut, grows again along other lines, relationships do not stop at a break; they reconnect and expand in unexpected directions.",
+          "The colours that bleed across the lines follow the same movement. When one colour settles and forms a territory, another seeps into its border, dissolving that territory and making yet another. As territorialization and deterritorialization repeat, boundaries are fixed nowhere and are endlessly redrawn.",
+          "In this way, we keep changing as we influence one another. I hope this work becomes a small occasion for viewers to recall the invisible web of relationships that surrounds them."
+        ]
+      },
+      "artist": {
+        "name": "Seo Eui Jeong",
+        "bio": "An artist working in painting and illustration in Korea and Japan."
+      }
+    },
+    "ja": {
+      "exhibition": {
+        "type": "招待個展",
+        "title": "関係の可変性",
+        "subtitle": "縁起とリゾームの絵画的具現",
+        "venue": "euiart オンラインギャラリー",
+        "offline": {
+          "venue": "KMJアートギャラリー 2階"
+        },
+        "statement": [
+          "この世界の誰ひとりとして、独立して存在することはできない。\n誰もが絶えず関係を結び、影響を与え合いながら、ただ変化していくだけだ。",
+          "私たちはかつてないほど緻密につながった世界に生きているが、孤立感はむしろ深まっている。それは、私たちが自らを孤立した存在だと思っているからかもしれない。〈関係の可変性〉はこの問いから出発する。固定された「私」を手放し、存在を関係のなかで生まれるものとして見つめ直したい。",
+          "このまなざしは、二つの思想と響き合っている。仏教の縁起は「これあるがゆえに、かれあり」と説く。何ものも単独では生じず、すべては互いに依りかかり、しばしとどまるにすぎない。ドゥルーズとガタリのリゾームもまた、中心も始まりもなく、どこからでも他とつながりながら伸びていく。二つの思想が指し示す先は同じである。「私」とは固定された実体ではなく、関係が編み上げたひとつの結び目なのだ。",
+          "〈絡み合い〉は、その結び目を画面の上に広げたものである。無数に交差する線は、絶えず変わりゆく関係の流れである。リゾームが断ち切られても別の線をたどって再び伸びていくように、関係もまた断絶で止まることなく、再びつながり、思いがけない方向へと広がっていく。",
+          "線の上ににじむ色も、同じ動きをたどる。ひとつの色が場所を得て領域をつくると、別の色がその境界に染み込み、領域を崩して、また別の領域をつくる。領土化と脱領土化が繰り返されるあいだ、境界はどこにも固定されず、絶えず描き直される。",
+          "このように私たちは、互いに影響を与え合いながら絶えず変化している。この作品が、見る人にとって自分を取り巻く見えない関係の網を思い起こす、ささやかなきっかけとなれば幸いである。"
+        ]
+      },
+      "artist": {
+        "name": "徐義廷",
+        "bio": "韓国と日本で絵画とイラストレーションの制作を行う作家。"
+      }
+    }
+  }
 }

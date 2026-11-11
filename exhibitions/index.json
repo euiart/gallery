@@ -5,7 +5,10 @@
     "site": "https://www.euiart.com",
     "owner": "서의정 (Seo Eui Jeong)",
     "year": 2026,
-    "default_bgm": "assets/bgm.mp3"
+    "default_bgm": "assets/bgm.mp3",
+    "name_ja": "euiart オンラインギャラリー",
+    "owner_en": "Seo Eui Jeong",
+    "owner_ja": "徐義廷 (Seo Eui Jeong)"
   },
   "default": "seo-euijeong",
   "exhibitions": [
@@ -17,7 +20,9 @@
       "start": "2026-11-21",
       "end": "2026-12-20",
       "desc": "얽힘 연작 10점",
-      "file": "exhibitions/seo-euijeong.json"
+      "file": "exhibitions/seo-euijeong.json",
+      "label_en": "Invitational Solo Exhibition “The Variability of Relations” Seo Eui Jeong",
+      "label_ja": "招待個展「関係の可変性」徐義廷"
     }
   ],
   "backend": {
