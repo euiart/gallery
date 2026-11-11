@@ -4,7 +4,8 @@
     "name_en": "euiart online gallery",
     "site": "https://www.euiart.com",
     "owner": "서의정 (Seo Eui Jeong)",
-    "year": 2026
+    "year": 2026,
+    "default_bgm": "assets/bgm.mp3"
   },
   "default": "seo-euijeong",
   "exhibitions": [
@@ -18,5 +19,10 @@
       "desc": "얽힘 연작 10점",
       "file": "exhibitions/seo-euijeong.json"
     }
-  ]
+  ],
+  "backend": {
+    "url": "",
+    "anonKey": "",
+    "bucket": "gallery"
+  }
 }
