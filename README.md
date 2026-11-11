@@ -1,6 +1,6 @@
 # euiart 온라인 갤러리 · euiart online gallery
 
-3D 가상 전시장 — https://euiart.github.io/gallery/
+3D 가상 전시장 — https://euiart.com/gallery/
 
 기획·운영: 서의정 (Seo Eui Jeong) · https://www.euiart.com
 
