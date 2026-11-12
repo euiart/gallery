@@ -1,0 +1,188 @@
+{
+  "artist": {
+    "name": "테스트 작가 5",
+    "name_en": "Test Artist 5",
+    "bio": "",
+    "website": ""
+  },
+  "exhibition": {
+    "eyebrow": "Test · Online",
+    "title": "테스트 전시 5",
+    "subtitle": "Test Exhibition 5",
+    "period": "테스트 기간",
+    "venue": "euiart 온라인 갤러리",
+    "statement": [
+      "이 전시는 편집 기능을 시험해 보는 테스트 전시예요. 왼쪽 위 제목 카드를 두 번 클릭해 로그인하면, 작품 이미지·제목·배치·액자·조명·벽과 바닥을 직접 바꾸고 [저장하기]로 저장할 수 있어요."
+    ]
+  },
+  "space": {
+    "wall": "#efe9df",
+    "floor": "#9c7b58",
+    "floorStyle": "wood",
+    "text": "#2a2520",
+    "gap": 1.6
+  },
+  "works": [
+    {
+      "title": "작품 1",
+      "title_en": "Work 1",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 90,
+      "height_cm": 120,
+      "size": "90×120cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 31,
+        "bg": "#ece4d4",
+        "colors": [
+          "#c8553d",
+          "#2d6a8f",
+          "#e8b04a",
+          "#33312c"
+        ]
+      }
+    },
+    {
+      "title": "작품 2",
+      "title_en": "Work 2",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 162,
+      "height_cm": 130,
+      "size": "162×130cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 62,
+        "bg": "#ece4d4",
+        "colors": [
+          "#e07a5f",
+          "#3d405b",
+          "#81b29a",
+          "#f2cc8f"
+        ]
+      }
+    },
+    {
+      "title": "작품 3",
+      "title_en": "Work 3",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 60,
+      "height_cm": 60,
+      "size": "60×60cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 93,
+        "bg": "#ece4d4",
+        "colors": [
+          "#264653",
+          "#2a9d8f",
+          "#e9c46a",
+          "#f4a261"
+        ]
+      }
+    },
+    {
+      "title": "작품 4",
+      "title_en": "Work 4",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 100,
+      "height_cm": 80,
+      "size": "100×80cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 124,
+        "bg": "#ece4d4",
+        "colors": [
+          "#7f5539",
+          "#b08968",
+          "#ddb892",
+          "#3a2e2a"
+        ]
+      }
+    },
+    {
+      "title": "작품 5",
+      "title_en": "Work 5",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 116,
+      "height_cm": 91,
+      "size": "116×91cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 155,
+        "bg": "#ece4d4",
+        "colors": [
+          "#5f0f40",
+          "#9a031e",
+          "#fb8b24",
+          "#0f4c5c"
+        ]
+      }
+    },
+    {
+      "title": "작품 6",
+      "title_en": "Work 6",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 50,
+      "height_cm": 65,
+      "size": "50×65cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 186,
+        "bg": "#ece4d4",
+        "colors": [
+          "#386641",
+          "#6a994e",
+          "#a7c957",
+          "#bc4749"
+        ]
+      }
+    },
+    {
+      "title": "작품 7",
+      "title_en": "Work 7",
+      "year": "2026",
+      "medium": "Oil on canvas",
+      "width_cm": 130,
+      "height_cm": 162,
+      "size": "130×162cm",
+      "size_fixed": true,
+      "note": "예시 작품입니다. 편집 모드에서 이미지와 설명을 바꿀 수 있어요.",
+      "image": "",
+      "placeholder": {
+        "style": "fields",
+        "seed": 217,
+        "bg": "#ece4d4",
+        "colors": [
+          "#14213d",
+          "#fca311",
+          "#e5e5e5",
+          "#7d8597"
+        ]
+      }
+    }
+  ]
+}

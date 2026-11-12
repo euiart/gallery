@@ -32,6 +32,51 @@
       "desc": "편집 테스트용",
       "file": "exhibitions/test.json",
       "hidden": true
+    },
+    {
+      "id": "test1",
+      "number": 11,
+      "label": "테스트 전시 1",
+      "period": "테스트",
+      "desc": "편집 테스트용",
+      "file": "exhibitions/test1.json",
+      "hidden": true
+    },
+    {
+      "id": "test2",
+      "number": 12,
+      "label": "테스트 전시 2",
+      "period": "테스트",
+      "desc": "편집 테스트용",
+      "file": "exhibitions/test2.json",
+      "hidden": true
+    },
+    {
+      "id": "test3",
+      "number": 13,
+      "label": "테스트 전시 3",
+      "period": "테스트",
+      "desc": "편집 테스트용",
+      "file": "exhibitions/test3.json",
+      "hidden": true
+    },
+    {
+      "id": "test4",
+      "number": 14,
+      "label": "테스트 전시 4",
+      "period": "테스트",
+      "desc": "편집 테스트용",
+      "file": "exhibitions/test4.json",
+      "hidden": true
+    },
+    {
+      "id": "test5",
+      "number": 15,
+      "label": "테스트 전시 5",
+      "period": "테스트",
+      "desc": "편집 테스트용",
+      "file": "exhibitions/test5.json",
+      "hidden": true
     }
   ],
   "backend": {
