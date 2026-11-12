@@ -23,11 +23,20 @@
       "file": "exhibitions/seo-euijeong.json",
       "label_en": "Invitational Solo Exhibition “The Variability of Relations” Seo Eui Jeong",
       "label_ja": "招待個展「関係の可変性」徐義廷"
+    },
+    {
+      "id": "test",
+      "number": 2,
+      "label": "테스트 전시",
+      "period": "테스트",
+      "desc": "편집 테스트용",
+      "file": "exhibitions/test.json",
+      "hidden": true
     }
   ],
   "backend": {
-    "url": "",
-    "anonKey": "",
+    "url": "https://lxytcwnkrccgqnyemjib.supabase.co",
+    "anonKey": "sb_publishable_fMUwo-pr0a8YV3K_GVD4VQ_PDk_NIT-",
     "bucket": "gallery"
   }
 }
