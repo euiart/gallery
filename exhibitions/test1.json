@@ -18,7 +18,7 @@
   "space": {
     "wall": "#efe9df",
     "floor": "#9c7b58",
-    "floorStyle": "wood",
+    "floorStyle": "polished",
     "text": "#2a2520",
     "gap": 1.6
   },
