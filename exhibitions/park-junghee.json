@@ -1,0 +1,65 @@
+{
+  "hidden": true,
+  "artist": {
+    "name": "박정희",
+    "name_en": "Park Jung Hee",
+    "bio": "",
+    "website": ""
+  },
+  "exhibition": {
+    "number": 4,
+    "type": "초대 개인전",
+    "type_en": "Invitational Solo Exhibition",
+    "title": "",
+    "subtitle": "",
+    "venue": "euiart 온라인 갤러리",
+    "period": "2026. 12. 1 – 12. 31",
+    "start": "2026-12-01",
+    "end": "2026-12-31",
+    "statement": []
+  },
+  "i18n": {
+    "en": {
+      "artist": {
+        "name": "Park Jung Hee",
+        "bio": ""
+      },
+      "exhibition": {
+        "type": "Invitational Solo Exhibition",
+        "venue": "euiart online gallery"
+      }
+    },
+    "ja": {
+      "artist": {
+        "name": "박정희",
+        "bio": ""
+      },
+      "exhibition": {
+        "type": "招待個展",
+        "venue": "euiart オンラインギャラリー"
+      }
+    }
+  },
+  "space": {
+    "gap": 1.5,
+    "text": "#22201d",
+    "wall": "#f3f2ee",
+    "floor": "#bfbbb3",
+    "theme": "clerestory",
+    "ghosts": true,
+    "seating": "tufted",
+    "ceilKind": "auto",
+    "wallKind": "concrete",
+    "art_light": 43,
+    "floorKind": "marble",
+    "art_linked": true,
+    "floorStyle": "polished",
+    "floor_tone": -40,
+    "ghost_kind": "people_cats",
+    "room_light": 19,
+    "wall_bright": 37,
+    "floor_bright": 18
+  },
+  "works": [],
+  "presets": []
+}

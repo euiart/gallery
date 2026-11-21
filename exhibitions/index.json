@@ -25,6 +25,42 @@
       "label_ja": "招待個展「関係の可変性」徐義廷"
     },
     {
+      "id": "kim-bosun",
+      "number": 2,
+      "label": "초대 개인전 김보선",
+      "period": "2026. 12. 1 – 12. 31",
+      "start": "2026-12-01",
+      "end": "2026-12-31",
+      "desc": "초대 작가 김보선",
+      "file": "exhibitions/kim-bosun.json",
+      "label_en": "Invitational Solo Exhibition Kim Bo Sun",
+      "label_ja": "招待個展 김보선"
+    },
+    {
+      "id": "lee-kyungshin",
+      "number": 3,
+      "label": "초대 개인전 이경신",
+      "period": "2026. 12. 1 – 12. 31",
+      "start": "2026-12-01",
+      "end": "2026-12-31",
+      "desc": "초대 작가 이경신",
+      "file": "exhibitions/lee-kyungshin.json",
+      "label_en": "Invitational Solo Exhibition Lee Kyungshin",
+      "label_ja": "招待個展 이경신"
+    },
+    {
+      "id": "park-junghee",
+      "number": 4,
+      "label": "초대 개인전 박정희",
+      "period": "2026. 12. 1 – 12. 31",
+      "start": "2026-12-01",
+      "end": "2026-12-31",
+      "desc": "초대 작가 박정희",
+      "file": "exhibitions/park-junghee.json",
+      "label_en": "Invitational Solo Exhibition Park Jung Hee",
+      "label_ja": "招待個展 박정희"
+    },
+    {
       "id": "test",
       "number": 2,
       "label": "테스트 전시",
