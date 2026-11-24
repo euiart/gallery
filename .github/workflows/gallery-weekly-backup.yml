@@ -1,0 +1,236 @@
+# euiart 온라인 갤러리 — 매주 자동 백업 (이 파일 하나로 동작해요)
+# 매주 한 번, 서버(Supabase)에 저장된 모든 전시 설정을 이 저장소의 backups 폴더에 저장해요.
+#  - backups/latest.json      : 가장 최근 백업 (편집 화면 '백업과 복원'에서 바로 불러올 수 있어요)
+#  - backups/weekly/날짜.json  : 바뀐 주마다 하나씩, 최근 26개를 남겨요. 더 오래된 것도 GitHub 기록(History)에는 남아요.
+#  - backups/status.json      : 마지막으로 확인한 날 (바뀐 게 없어도 매주 적어요 — 편집 화면이 이걸로 백업이 잘 되는지 봐요)
+#  - exhibitions/<전시>.json   : 서버가 멈췄을 때 쓰는 비상용 파일도 최신 내용으로 바꿔요(목록에 보이는 전시만).
+# 서버를 읽기만 하고, 서버 내용은 절대 바꾸지 않아요. 서버를 못 읽으면 아무것도 바꾸지 않고 실패(빨간 X)로 끝나요.
+name: Weekly gallery backup
+
+on:
+  schedule:
+    - cron: "47 18 * * 0"    # 매주 월요일 새벽 3시 47분쯤 (한국 시간)
+  workflow_dispatch:          # Actions 화면에서 [Run workflow]로 지금 바로 백업할 수도 있어요
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gallery-weekly-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read all exhibitions from the server
+        run: |
+          python3 -I - . <<'PY'
+          """euiart 온라인 갤러리 — 주간 자동 백업 (GitHub Actions가 실행).
+
+          서버(Supabase)를 '읽기만' 해서
+            backups/latest.json, backups/weekly/YYYY-MM-DD.json  (편집 화면 '모든 전시 한 번에 내려받기'와 같은 형식)
+            exhibitions/<id>.json                                (비상용 파일 — 목록에 보이는 전시만, 안전 검사 통과할 때만)
+          을 씁니다. 바뀐 것이 없으면 파일을 건드리지 않습니다. 표준 라이브러리만 씁니다.
+          사용: python3 -I weekly_backup.py <저장소 폴더>
+          """
+          import datetime, json, os, sys, urllib.error, urllib.request
+
+          KEEP_WEEKLY = 26
+          KST = datetime.timezone(datetime.timedelta(hours=9))
+          ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else '.')
+          BACK = os.path.join(ROOT, 'backups')
+
+
+          def say(msg):
+              print(msg, flush=True)
+
+
+          def load_json(path):
+              with open(path, encoding='utf-8') as f:
+                  return json.load(f)
+
+
+          def write_json(path, data, indent=None):
+              os.makedirs(os.path.dirname(path), exist_ok=True)
+              tmp = path + '.tmp'
+              with open(tmp, 'w', encoding='utf-8') as f:
+                  json.dump(data, f, ensure_ascii=False, indent=indent)
+                  f.write('\n')
+              os.replace(tmp, path)
+
+
+          def backend():
+              try:
+                  reg = load_json(os.path.join(ROOT, 'exhibitions', 'index.json'))
+              except (OSError, ValueError) as e:
+                  raise SystemExit('저장소의 exhibitions/index.json을 읽지 못했어요: %s' % e)
+              b = reg.get('backend') or {}
+              url = (os.environ.get('GALLERY_URL') or b.get('url') or '').rstrip('/')
+              key = os.environ.get('GALLERY_KEY') or b.get('anonKey') or ''
+              if not url or not key:
+                  raise SystemExit('exhibitions/index.json에 서버 주소(backend)가 없어요.')
+              return reg, url, key, b.get('bucket') or 'gallery'
+
+
+          def request(url, key, path, body=None):
+              data = None if body is None else json.dumps(body).encode()
+              req = urllib.request.Request(url + path, data=data, method='POST' if body is not None else 'GET', headers={
+                  'apikey': key, 'Authorization': 'Bearer ' + key, 'Accept': 'application/json',
+                  'Content-Type': 'application/json', 'User-Agent': 'euiart-gallery-backup'})
+              last = None
+              for _ in range(3):
+                  try:
+                      with urllib.request.urlopen(req, timeout=40) as r:
+                          return json.loads(r.read().decode('utf-8'))
+                  except urllib.error.HTTPError as e:
+                      if e.code < 500:
+                          raise
+                      last = e
+                  except (urllib.error.URLError, TimeoutError) as e:
+                      last = e
+              raise last
+
+
+          def storage_files(url, key, bucket):
+              files = []
+
+              def walk(prefix, depth):
+                  off = 0
+                  while True:
+                      rows = request(url, key, '/storage/v1/object/list/' + bucket, {
+                          'prefix': prefix, 'limit': 1000, 'offset': off, 'sortBy': {'column': 'name', 'order': 'asc'}})
+                      for o in rows:
+                          q = prefix + '/' + o['name'] if prefix else o['name']
+                          if o.get('id') is None:
+                              if depth < 4:
+                                  walk(q, depth + 1)
+                          elif o['name'] != '.emptyFolderPlaceholder':
+                              files.append({'path': q, 'size': int((o.get('metadata') or {}).get('size') or 0)})
+                      if len(rows) < 1000:
+                          return
+                      off += 1000
+              walk('', 0)
+              return files
+
+
+          def looks_like_cfg(c):
+              return isinstance(c, dict) and isinstance(c.get('works'), list) and isinstance(c.get('exhibition'), dict)
+
+
+          def main():
+              reg, url, key, bucket = backend()
+              rows = request(url, key, '/rest/v1/exhibitions?select=id,config&order=id')
+              ex = {r['id']: r['config'] for r in rows if r.get('id') and looks_like_cfg(r.get('config'))}
+              if not ex:
+                  raise SystemExit('서버에서 전시를 하나도 읽지 못했어요. 이번 주는 저장하지 않아요.')
+
+              gb = {}
+              try:   # 관람객에게 공개된 글만 읽을 수 있어요(확인 전 글·방문 기록은 로그인해야 보여요).
+                  for r in request(url, key, '/rest/v1/guestbook?select=id,exhibition_id,name,body,created_at,approved'
+                                             '&approved=is.true&order=created_at.desc&limit=5000'):
+                      gb.setdefault(r.pop('exhibition_id'), []).append(r)
+              except Exception as e:
+                  say('방명록은 건너뜀: %s' % e)
+              files = None
+              try:
+                  files = storage_files(url, key, bucket)
+              except Exception as e:
+                  say('파일 목록은 건너뜀: %s' % e)
+
+              now = datetime.datetime.now(datetime.timezone.utc)
+              out = {'kind': 'euiart-gallery-backup', 'version': 1, 'auto': True,
+                     'saved': now.strftime('%Y-%m-%dT%H:%M:%SZ'), 'exhibitions': ex, 'guestbook': gb, 'visits': {}}
+              if files is not None:
+                  out['files'] = files
+
+              latest_path = os.path.join(BACK, 'latest.json')
+              old = None
+              if os.path.exists(latest_path):
+                  try:
+                      old = load_json(latest_path)
+                  except Exception:
+                      old = None
+              same = old is not None and all(old.get(k) == out.get(k) for k in ('exhibitions', 'guestbook')) \
+                  and (files is None or old.get('files') == files)
+              if same:
+                  say('지난 백업(%s)과 같아요. 새로 저장하지 않아요.' % old.get('saved'))
+              else:
+                  if files is None and old and 'files' in old:
+                      out['files'] = old['files']
+                  write_json(latest_path, out)
+                  day = now.astimezone(KST).strftime('%Y-%m-%d')
+                  write_json(os.path.join(BACK, 'weekly', day + '.json'), out)
+                  weekly = sorted(f for f in os.listdir(os.path.join(BACK, 'weekly')) if f.endswith('.json'))
+                  for f in weekly[:-KEEP_WEEKLY]:
+                      os.remove(os.path.join(BACK, 'weekly', f))
+                  say('전시 %d개를 백업했어요: backups/weekly/%s.json' % (len(ex), day))
+
+              # 비상용 파일: 관람객 목록에 보이는 전시이고, 저장소에 이미 파일이 있을 때만.
+              for e in reg.get('exhibitions') or []:
+                  eid, rel = e.get('id'), e.get('file') or ''
+                  if e.get('hidden') or eid not in ex or not rel.startswith('exhibitions/') or not rel.endswith('.json') \
+                          or rel == 'exhibitions/index.json' or '..' in rel:
+                      continue
+                  path = os.path.join(ROOT, rel)
+                  if not os.path.exists(path):
+                      continue
+                  try:
+                      cur = load_json(path)
+                  except Exception:
+                      cur = None
+                  new = ex[eid]
+                  if cur == new:
+                      continue
+                  n_old = len(cur.get('works') or []) if isinstance(cur, dict) else 0
+                  n_new = len(new.get('works') or [])
+                  if n_new == 0 or n_new * 2 < n_old:   # 작품이 갑자기 사라졌으면 실수일 수 있어 비상용은 그대로 둬요
+                      say('비상용 %s는 그대로 둠 (작품 %d점 → %d점)' % (rel, n_old, n_new))
+                      continue
+                  write_json(path, new, indent=2)
+                  say('비상용 파일을 최신으로: %s' % rel)
+
+              # 편집 화면이 읽는 작은 상태 파일 — 성공한 주에는 바뀐 게 없어도 '확인한 날'을 적어요.
+              # (2주 넘게 그대로면 편집 화면이 'Actions가 꺼졌는지 확인' 안내를 띄워요.)
+              latest = load_json(latest_path)
+              write_json(os.path.join(BACK, 'status.json'), {
+                  'checked': now.strftime('%Y-%m-%dT%H:%M:%SZ'), 'saved': latest.get('saved'),
+                  'count': len(latest.get('exhibitions') or {}), 'ids': sorted(latest.get('exhibitions') or {})})
+
+              readme = os.path.join(BACK, 'README.txt')
+              if not os.path.exists(readme):
+                  with open(readme, 'w', encoding='utf-8') as f:
+                      f.write('euiart 온라인 갤러리 자동 백업 (매주 월요일 새벽, GitHub Actions)\n\n'
+                              'latest.json  가장 최근 백업\nweekly/      주마다 하나씩, 최근 %d개\nstatus.json  마지막으로 확인한 날(편집 화면이 읽어요)\n\n'
+                              '되살리기: 편집 화면 → 전시 정보 → 백업과 복원 → [자동 백업에서 이 전시 불러오기]\n'
+                              '  또는 이 파일을 내려받아 [설정 파일 불러오기]로 고른 뒤 저장하기.\n'
+                              '들어 있는 것: 모든 전시의 설정, 공개된 방명록 글, 서버에 올린 파일 목록(파일 자체는 아님).\n'
+                              '들어 있지 않은 것: 확인 전 방명록 글, 방문 기록(로그인해야 읽을 수 있어서), 이미지·음악 파일.\n' % KEEP_WEEKLY)
+
+
+          if __name__ == '__main__':
+              try:
+                  main()
+              except (urllib.error.URLError, TimeoutError, ConnectionError, json.JSONDecodeError) as e:
+                  raise SystemExit('서버를 읽지 못해 이번 주 백업은 건너뛰어요(저장소는 그대로예요): %s\n'
+                                   '서버가 일시 정지됐을 수 있어요 — Supabase 대시보드에서 프로젝트가 켜져 있는지 확인해 주세요.' % e)
+          PY
+
+      - name: Save to this repository (only if something changed)
+        run: |
+          git add -A backups exhibitions
+          if git diff --cached --quiet; then
+            echo "바뀐 것이 없어 저장하지 않았어요."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "자동 백업 $(TZ=Asia/Seoul date +%Y-%m-%d)"
+          for i in 1 2 3; do
+            git pull --rebase --quiet && git push && exit 0
+            sleep 10
+          done
+          exit 1
