@@ -170,13 +170,14 @@
 <p>Uploaded pages and changed settings reach visitors after you press <b>Save</b>.</p>
 </details>
 <details><summary>Backup &amp; restore</summary>
-<p>The free server (Supabase) makes no automatic backups. Download one now and then under <b>Backup &amp; restore</b> in the Exhibition info tab.</p>
+<p>The free server (Supabase) makes no backups of its own, so the GitHub repository saves the settings of every exhibition to its <i>backups</i> folder <b>every Monday before dawn</b> (Korea time; last 26 weeks). Before big changes, downloading a copy yourself under <b>Backup &amp; restore</b> in the Exhibition info tab is safer still.</p>
 <ul>
+<li><b>Load this exhibition from the automatic backup</b>: brings this exhibition back to the latest automatic backup (press twice). The date of the last automatic backup is shown here too. For older ones, download a dated file from <b>Older automatic backups</b> (admin) and choose it with <b>Load a settings file</b>. If there has been no automatic backup for more than two weeks, a red note appears — check that <i>Weekly gallery backup</i> is enabled under Actions in the GitHub repository.</li>
 <li><b>Download this exhibition's settings</b>: saves this exhibition as <i>address.json</i> — the same as <b>Export settings file</b> in the bar below.</li>
 <li><b>Load a settings file</b>: brings this exhibition back to a saved file (or a full backup). It reaches visitors only after Save, and ↶ undoes it.</li>
 <li><b>Download all exhibitions</b> (admin): settings, guestbooks and visit counts of every exhibition in one file. Images and music are not included.</li>
 <li><b>Check server storage</b> (admin): how much of the free 1 GB the uploaded images and music use. Data sent to visitors is shown on the Supabase usage page.</li>
-<li>A free server may pause after a week with no use. The GitHub repository contacts it every three days to prevent this; if it still pauses, restart the project in the Supabase dashboard. While it is paused, exhibitions open from the files in the <i>exhibitions</i> folder on GitHub. Those may be older, so after big changes upload the downloaded <i>address.json</i> there under the same name.</li>
+<li>A free server may pause after a week with no use. The GitHub repository contacts it every three days to prevent this; if it still pauses, restart the project in the Supabase dashboard. While it is paused, exhibitions open from the files in the <i>exhibitions</i> folder on GitHub. The automatic backup also brings those files up to date every week (only exhibitions shown in the list; if more than half of the works suddenly disappeared, it leaves the file alone in case it was a mistake).</li>
 </ul>
 </details>
 <details><summary>If something goes wrong</summary>
