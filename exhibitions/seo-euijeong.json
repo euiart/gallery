@@ -1,376 +1,18 @@
 {
-  "artist": {
-    "name": "서의정",
-    "name_en": "Seo Eui Jeong",
-    "bio": "한국과 일본에서 활동하며 회화와 일러스트 작업을 하는 작가",
-    "website": "https://www.euiart.com"
-  },
-  "exhibition": {
-    "type": "초대 개인전",
-    "type_en": "Invitational Solo Exhibition",
-    "number": 1,
-    "title": "관계의 가변성",
-    "subtitle": "연기(緣起)와 리좀의 회화적 구현",
-    "period": "2026. 11. 21 – 12. 20",
-    "venue": "euiart 온라인 갤러리",
-    "offline": {
-      "venue": "KMJ 아트 갤러리 2층",
-      "period": "2026. 11. 21 – 11. 26"
-    },
-    "statement": [
-      "세상의 어느 누구도 독립적으로 존재할 수 없다.\n모두가 끊임없이 관계를 맺고, 영향을 주고받으며 변화할 뿐이다.",
-      "우리는 그 어느 때보다 촘촘하게 연결된 세상에 살고 있지만, 고립감은 오히려 깊어지고 있다. 어쩌면 우리가 스스로를 홀로 떨어진 존재로 여기기 때문일지 모른다. 〈관계의 가변성〉은 이 물음에서 출발한다. 고정된 ‘나’를 내려놓고, 존재를 관계 속에서 생겨나는 것으로 다시 바라보고자 한다.",
-      "이러한 시선은 두 갈래의 사유와 맞닿아 있다. 불교의 연기(緣起)는 “이것이 있으므로 저것이 있다”고 말한다. 어떤 것도 홀로 생겨나지 않으며, 모든 것은 서로 기대어 잠시 머물 뿐이다. 들뢰즈와 가타리의 리좀(Rhizome) 역시 중심도 시작도 없이, 어디서든 다른 것과 이어지며 뻗어나간다. 두 사유가 가리키는 곳은 같다. ‘나’는 고정된 실체가 아니라, 관계가 엮어 낸 하나의 매듭이다.",
-      "〈얽힘〉은 그 매듭을 화면 위에 펼친 것이다. 무수히 교차하는 선은 끊임없이 변하는 관계의 흐름이다. 리좀이 끊어져도 다른 선을 따라 다시 뻗어나가듯, 관계 또한 단절에서 멈추지 않고 다시 이어지며 예기치 않은 방향으로 확장된다.",
-      "선 위에 번지는 색도 같은 움직임을 따른다. 하나의 색이 자리를 잡아 영역을 이루면, 다른 색이 그 경계로 스며들어 영역을 허물고 또 다른 영역을 만든다. 영토화와 탈영토화가 되풀이되는 사이, 경계는 어디에도 고정되지 않고 끊임없이 다시 그려진다.",
-      "이처럼 우리는 서로에게 영향을 주고받으며 끊임없이 변화한다. 이 작업이 보는 이에게, 자신을 둘러싼 보이지 않는 관계망을 떠올리는 작은 계기가 되기를 바란다."
-    ],
-    "start": "2026-11-21",
-    "end": "2026-12-20"
-  },
-  "space": {
-    "wall": "#f3f2ee",
-    "floor": "#bfbbb3",
-    "floorStyle": "concrete",
-    "text": "#22201d",
-    "gap": 1.5,
-    "room_light": 35,
-    "art_light": 50,
-    "art_linked": false,
-    "theme": "concrete",
-    "floorKind": "polished"
-  },
-  "works": [
-    {
-      "title": "얽힘 01",
-      "title_en": "Entanglement 01",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/01.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 13,
-        "bg": "#d8d2c4",
-        "square": "#0e0e0e",
-        "lines": "#f7f3ea",
-        "mist": [
-          "#c3b59e",
-          "#8e877b"
-        ],
-        "accents": []
-      },
-      "id": "w01",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 01"
-        }
-      }
-    },
-    {
-      "title": "얽힘 02",
-      "title_en": "Entanglement 02",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/02.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 26,
-        "bg": "#1e3e78",
-        "square": "#2650b0",
-        "lines": "#eef1f6",
-        "mist": [
-          "#5d88d8",
-          "#0d1b3a"
-        ],
-        "accents": [
-          "#9cc0f0"
-        ]
-      },
-      "id": "w02",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 02"
-        }
-      }
-    },
-    {
-      "title": "얽힘 03",
-      "title_en": "Entanglement 03",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/03.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 39,
-        "bg": "#7b2c2c",
-        "square": "#d8b24a",
-        "lines": "#f3e6d4",
-        "mist": [
-          "#b2493b",
-          "#3d1414"
-        ],
-        "accents": [
-          "#e9c46a"
-        ]
-      },
-      "id": "w03",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 03"
-        }
-      }
-    },
-    {
-      "title": "얽힘 04",
-      "title_en": "Entanglement 04",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/04.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 52,
-        "bg": "#2e5c4f",
-        "square": "#ece5d6",
-        "lines": "#f2eee4",
-        "mist": [
-          "#4f8a74",
-          "#14302a"
-        ],
-        "accents": [
-          "#b9d7c4"
-        ]
-      },
-      "id": "w04",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 04"
-        }
-      }
-    },
-    {
-      "title": "얽힘 05",
-      "title_en": "Entanglement 05",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/05.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 65,
-        "bg": "#c8773a",
-        "square": "#262626",
-        "lines": "#fbf1e2",
-        "mist": [
-          "#e3a061",
-          "#7a3f17"
-        ],
-        "accents": [
-          "#3b3b3b"
-        ]
-      },
-      "id": "w05",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 05"
-        }
-      }
-    },
-    {
-      "title": "얽힘 06",
-      "title_en": "Entanglement 06",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/06.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 78,
-        "bg": "#6b5b8e",
-        "square": "#c43e5b",
-        "lines": "#f1ecf6",
-        "mist": [
-          "#9787bd",
-          "#2f2545"
-        ],
-        "accents": [
-          "#f0a8b8"
-        ]
-      },
-      "id": "w06",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 06"
-        }
-      }
-    },
-    {
-      "title": "얽힘 07",
-      "title_en": "Entanglement 07",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/07.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 91,
-        "bg": "#ece6dc",
-        "square": "#c6322c",
-        "lines": "#2a2724",
-        "mist": [
-          "#d7cdbd",
-          "#bfb3a0"
-        ],
-        "accents": [
-          "#c6322c"
-        ]
-      },
-      "id": "w07",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 07"
-        }
-      }
-    },
-    {
-      "title": "얽힘 08",
-      "title_en": "Entanglement 08",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/08.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 104,
-        "bg": "#1f3030",
-        "square": "#4db2a4",
-        "lines": "#e6efe9",
-        "mist": [
-          "#2f5a55",
-          "#0d1717"
-        ],
-        "accents": [
-          "#8fd6c8"
-        ]
-      },
-      "id": "w08",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 08"
-        }
-      }
-    },
-    {
-      "title": "얽힘 09",
-      "title_en": "Entanglement 09",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/09.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 117,
-        "bg": "#b5c2ce",
-        "square": "#1c2a46",
-        "lines": "#f7f8fa",
-        "mist": [
-          "#d5dee6",
-          "#7f93a8"
-        ],
-        "accents": [
-          "#1c2a46"
-        ]
-      },
-      "id": "w09",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 09"
-        }
-      }
-    },
-    {
-      "title": "얽힘 10",
-      "title_en": "Entanglement 10",
-      "year": "2026",
-      "medium": "Mixed media",
-      "width_cm": 120,
-      "height_cm": 120,
-      "size": "120×120cm",
-      "size_fixed": true,
-      "note": "",
-      "image": "images/seo-euijeong/10.jpg",
-      "placeholder": {
-        "style": "entanglement",
-        "seed": 130,
-        "bg": "#383838",
-        "square": "#e8d26a",
-        "lines": "#efece4",
-        "mist": [
-          "#555",
-          "#1d1d1d"
-        ],
-        "accents": [
-          "#e8d26a"
-        ]
-      },
-      "id": "w10",
-      "i18n": {
-        "ja": {
-          "title": "絡み合い 10"
-        }
-      }
-    }
-  ],
-  "presets": [],
   "i18n": {
     "en": {
+      "artist": {
+        "bio": "An artist working in painting and illustration in Korea and Japan.",
+        "name": "Seo Eui Jeong"
+      },
       "exhibition": {
         "type": "Invitational Solo Exhibition",
         "title": "The Variability of Relations",
-        "subtitle": "A Pictorial Realization of Dependent Origination and the Rhizome",
         "venue": "euiart online gallery",
         "offline": {
-          "venue": "KMJ Art Gallery, 2F"
+          "venue": "KMJ Art Gallery"
         },
+        "subtitle": "A Pictorial Realization of Dependent Origination and the Rhizome",
         "statement": [
           "No one in this world can exist on their own.\nWe are all constantly forming relationships, influencing one another, and simply changing.",
           "We live in a world more densely connected than ever, yet our sense of isolation only deepens. Perhaps it is because we think of ourselves as beings standing apart. “The Variability of Relations” begins with this question. Setting aside a fixed ‘self’, it seeks to look at existence anew, as something that arises within relationships.",
@@ -379,21 +21,21 @@
           "The colours that bleed across the lines follow the same movement. When one colour settles and forms a territory, another seeps into its border, dissolving that territory and making yet another. As territorialization and deterritorialization repeat, boundaries are fixed nowhere and are endlessly redrawn.",
           "In this way, we keep changing as we influence one another. I hope this work becomes a small occasion for viewers to recall the invisible web of relationships that surrounds them."
         ]
-      },
-      "artist": {
-        "name": "Seo Eui Jeong",
-        "bio": "An artist working in painting and illustration in Korea and Japan."
       }
     },
     "ja": {
+      "artist": {
+        "bio": "韓国と日本で絵画とイラストレーションの制作を行う作家。",
+        "name": "徐義廷"
+      },
       "exhibition": {
         "type": "招待個展",
         "title": "関係の可変性",
-        "subtitle": "縁起とリゾームの絵画的具現",
         "venue": "euiart オンラインギャラリー",
         "offline": {
-          "venue": "KMJアートギャラリー 2階"
+          "venue": "KMJアートギャラリー"
         },
+        "subtitle": "縁起とリゾームの絵画的具現",
         "statement": [
           "この世界の誰ひとりとして、独立して存在することはできない。\n誰もが絶えず関係を結び、影響を与え合いながら、ただ変化していくだけだ。",
           "私たちはかつてないほど緻密につながった世界に生きているが、孤立感はむしろ深まっている。それは、私たちが自らを孤立した存在だと思っているからかもしれない。〈関係の可変性〉はこの問いから出発する。固定された「私」を手放し、存在を関係のなかで生まれるものとして見つめ直したい。",
@@ -402,11 +44,522 @@
           "線の上ににじむ色も、同じ動きをたどる。ひとつの色が場所を得て領域をつくると、別の色がその境界に染み込み、領域を崩して、また別の領域をつくる。領土化と脱領土化が繰り返されるあいだ、境界はどこにも固定されず、絶えず描き直される。",
           "このように私たちは、互いに影響を与え合いながら絶えず変化している。この作品が、見る人にとって自分を取り巻く見えない関係の網を思い起こす、ささやかなきっかけとなれば幸いである。"
         ]
-      },
-      "artist": {
-        "name": "徐義廷",
-        "bio": "韓国と日本で絵画とイラストレーションの制作を行う作家。"
       }
     }
+  },
+  "space": {
+    "gap": 1.5,
+    "text": "#22201d",
+    "wall": "#f3f2ee",
+    "floor": "#bfbbb3",
+    "grids": {
+      "1": {
+        "cols": 5,
+        "rows": 2,
+        "cells": [],
+        "gap_cm": 5,
+        "caption": "one"
+      }
+    },
+    "theme": "clerestory",
+    "ghosts": true,
+    "seating": "tufted",
+    "ceilKind": "auto",
+    "wallKind": "concrete",
+    "art_light": 43,
+    "floorKind": "marble",
+    "art_linked": true,
+    "floorStyle": "polished",
+    "floor_tone": -40,
+    "ghost_kind": "people_cats",
+    "room_light": 19,
+    "wall_texts": {
+      "info": {
+        "s": 2.59,
+        "top": 2.62,
+        "wall": 3
+      }
+    },
+    "wall_bright": 37,
+    "floor_bright": 18
+  },
+  "works": [
+    {
+      "id": "w01",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 01"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/01.jpg",
+      "title": "얽힘 01",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 01",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#d8d2c4",
+        "mist": [
+          "#c3b59e",
+          "#8e877b"
+        ],
+        "seed": 13,
+        "lines": "#f7f3ea",
+        "style": "entanglement",
+        "square": "#0e0e0e",
+        "accents": []
+      }
+    },
+    {
+      "id": "w02",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 02"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "https://lxytcwnkrccgqnyemjib.supabase.co/storage/v1/object/public/gallery/seo-euijeong/images/1794939088316-zsh5l0.jpg",
+      "title": "얽힘 02",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 02",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": false,
+      "placeholder": {
+        "bg": "#1e3e78",
+        "mist": [
+          "#5d88d8",
+          "#0d1b3a"
+        ],
+        "seed": 26,
+        "lines": "#eef1f6",
+        "style": "entanglement",
+        "square": "#2650b0",
+        "accents": [
+          "#9cc0f0"
+        ]
+      }
+    },
+    {
+      "id": "w03",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 03"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/03.jpg",
+      "title": "얽힘 03",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 03",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#7b2c2c",
+        "mist": [
+          "#b2493b",
+          "#3d1414"
+        ],
+        "seed": 39,
+        "lines": "#f3e6d4",
+        "style": "entanglement",
+        "square": "#d8b24a",
+        "accents": [
+          "#e9c46a"
+        ]
+      }
+    },
+    {
+      "id": "w04",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 04"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "https://lxytcwnkrccgqnyemjib.supabase.co/storage/v1/object/public/gallery/seo-euijeong/images/1795337672394-zz2qgn.jpg",
+      "title": "얽힘 04",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 04",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": false,
+      "placeholder": {
+        "bg": "#2e5c4f",
+        "mist": [
+          "#4f8a74",
+          "#14302a"
+        ],
+        "seed": 52,
+        "lines": "#f2eee4",
+        "style": "entanglement",
+        "square": "#ece5d6",
+        "accents": [
+          "#b9d7c4"
+        ]
+      }
+    },
+    {
+      "id": "w05",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 05"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/05.jpg",
+      "title": "얽힘 05",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 05",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#c8773a",
+        "mist": [
+          "#e3a061",
+          "#7a3f17"
+        ],
+        "seed": 65,
+        "lines": "#fbf1e2",
+        "style": "entanglement",
+        "square": "#262626",
+        "accents": [
+          "#3b3b3b"
+        ]
+      }
+    },
+    {
+      "id": "w06",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 06"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/06.jpg",
+      "title": "얽힘 06",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 06",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#6b5b8e",
+        "mist": [
+          "#9787bd",
+          "#2f2545"
+        ],
+        "seed": 78,
+        "lines": "#f1ecf6",
+        "style": "entanglement",
+        "square": "#c43e5b",
+        "accents": [
+          "#f0a8b8"
+        ]
+      }
+    },
+    {
+      "id": "w07",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 07"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/07.jpg",
+      "title": "얽힘 07",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 07",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece6dc",
+        "mist": [
+          "#d7cdbd",
+          "#bfb3a0"
+        ],
+        "seed": 91,
+        "lines": "#2a2724",
+        "style": "entanglement",
+        "square": "#c6322c",
+        "accents": [
+          "#c6322c"
+        ]
+      }
+    },
+    {
+      "id": "w08",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 08"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/08.jpg",
+      "title": "얽힘 08",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 08",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#1f3030",
+        "mist": [
+          "#2f5a55",
+          "#0d1717"
+        ],
+        "seed": 104,
+        "lines": "#e6efe9",
+        "style": "entanglement",
+        "square": "#4db2a4",
+        "accents": [
+          "#8fd6c8"
+        ]
+      }
+    },
+    {
+      "id": "w09",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 09"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/09.jpg",
+      "title": "얽힘 09",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 09",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#b5c2ce",
+        "mist": [
+          "#d5dee6",
+          "#7f93a8"
+        ],
+        "seed": 117,
+        "lines": "#f7f8fa",
+        "style": "entanglement",
+        "square": "#1c2a46",
+        "accents": [
+          "#1c2a46"
+        ]
+      }
+    },
+    {
+      "id": "w10",
+      "i18n": {
+        "ja": {
+          "title": "絡み合い 10"
+        }
+      },
+      "note": "",
+      "size": "120×120cm",
+      "year": "2026",
+      "image": "images/seo-euijeong/10.jpg",
+      "title": "얽힘 10",
+      "medium": "Mixed media",
+      "title_en": "Entanglement 10",
+      "width_cm": 120,
+      "height_cm": 120,
+      "no_caption": true,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#383838",
+        "mist": [
+          "#555",
+          "#1d1d1d"
+        ],
+        "seed": 130,
+        "lines": "#efece4",
+        "style": "entanglement",
+        "square": "#e8d26a",
+        "accents": [
+          "#e8d26a"
+        ]
+      }
+    }
+  ],
+  "artist": {
+    "bio": "한국과 일본에서 활동하며 회화와 일러스트 작업을 하는 작가",
+    "name": "서의정",
+    "name_en": "Seo Eui Jeong",
+    "website": "https://www.euiart.com"
+  },
+  "catalog": {
+    "mode": "pages",
+    "pages": [
+      {
+        "l": "images/seo-euijeong/catalog/01.jpg",
+        "s": "images/seo-euijeong/catalog/01_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/02.jpg",
+        "s": "images/seo-euijeong/catalog/02_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/03.jpg",
+        "s": "images/seo-euijeong/catalog/03_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/04.jpg",
+        "s": "images/seo-euijeong/catalog/04_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/05.jpg",
+        "s": "images/seo-euijeong/catalog/05_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/06.jpg",
+        "s": "images/seo-euijeong/catalog/06_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/07.jpg",
+        "s": "images/seo-euijeong/catalog/07_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/08.jpg",
+        "s": "images/seo-euijeong/catalog/08_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/09.jpg",
+        "s": "images/seo-euijeong/catalog/09_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/10.jpg",
+        "s": "images/seo-euijeong/catalog/10_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/11.jpg",
+        "s": "images/seo-euijeong/catalog/11_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/12.jpg",
+        "s": "images/seo-euijeong/catalog/12_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/13.jpg",
+        "s": "images/seo-euijeong/catalog/13_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/14.jpg",
+        "s": "images/seo-euijeong/catalog/14_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/15.jpg",
+        "s": "images/seo-euijeong/catalog/15_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/16.jpg",
+        "s": "images/seo-euijeong/catalog/16_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/17.jpg",
+        "s": "images/seo-euijeong/catalog/17_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/18.jpg",
+        "s": "images/seo-euijeong/catalog/18_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/19.jpg",
+        "s": "images/seo-euijeong/catalog/19_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/20.jpg",
+        "s": "images/seo-euijeong/catalog/20_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/21.jpg",
+        "s": "images/seo-euijeong/catalog/21_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/22.jpg",
+        "s": "images/seo-euijeong/catalog/22_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/23.jpg",
+        "s": "images/seo-euijeong/catalog/23_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/24.jpg",
+        "s": "images/seo-euijeong/catalog/24_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/25.jpg",
+        "s": "images/seo-euijeong/catalog/25_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/26.jpg",
+        "s": "images/seo-euijeong/catalog/26_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/27.jpg",
+        "s": "images/seo-euijeong/catalog/27_s.jpg"
+      },
+      {
+        "l": "images/seo-euijeong/catalog/28.jpg",
+        "s": "images/seo-euijeong/catalog/28_s.jpg"
+      }
+    ],
+    "aspect": 1,
+    "download": false
+  },
+  "presets": [],
+  "exhibition": {
+    "end": "2026-12-20",
+    "type": "초대 개인전",
+    "start": "2026-11-21",
+    "title": "관계의 가변성",
+    "venue": "euiart 온라인 갤러리",
+    "number": 1,
+    "period": "2026. 11. 21 – 12. 20",
+    "offline": {
+      "venue": "KMJ 아트 갤러리",
+      "period": "2026. 11. 21 – 11. 26"
+    },
+    "type_en": "Invitational Solo Exhibition",
+    "subtitle": "연기(緣起)와 리좀의 회화적 구현",
+    "statement": [
+      "세상의 어느 누구도 독립적으로 존재할 수 없다.\n모두가 끊임없이 관계를 맺고, 영향을 주고받으며 변화할 뿐이다.",
+      "우리는 그 어느 때보다 촘촘하게 연결된 세상에 살고 있지만, 고립감은 오히려 깊어지고 있다. 어쩌면 우리가 스스로를 홀로 떨어진 존재로 여기기 때문일지 모른다. 〈관계의 가변성〉은 이 물음에서 출발한다. 고정된 ‘나’를 내려놓고, 존재를 관계 속에서 생겨나는 것으로 다시 바라보고자 한다.",
+      "이러한 시선은 두 갈래의 사유와 맞닿아 있다. 불교의 연기(緣起)는 “이것이 있으므로 저것이 있다”고 말한다. 어떤 것도 홀로 생겨나지 않으며, 모든 것은 서로 기대어 잠시 머물 뿐이다. 들뢰즈와 가타리의 리좀(Rhizome) 역시 중심도 시작도 없이, 어디서든 다른 것과 이어지며 뻗어나간다. 두 사유가 가리키는 곳은 같다. ‘나’는 고정된 실체가 아니라, 관계가 엮어 낸 하나의 매듭이다.",
+      "〈얽힘〉은 그 매듭을 화면 위에 펼친 것이다. 무수히 교차하는 선은 끊임없이 변하는 관계의 흐름이다. 리좀이 끊어져도 다른 선을 따라 다시 뻗어나가듯, 관계 또한 단절에서 멈추지 않고 다시 이어지며 예기치 않은 방향으로 확장된다.",
+      "선 위에 번지는 색도 같은 움직임을 따른다. 하나의 색이 자리를 잡아 영역을 이루면, 다른 색이 그 경계로 스며들어 영역을 허물고 또 다른 영역을 만든다. 영토화와 탈영토화가 되풀이되는 사이, 경계는 어디에도 고정되지 않고 끊임없이 다시 그려진다.",
+      "이처럼 우리는 서로에게 영향을 주고받으며 끊임없이 변화한다. 이 작업이 보는 이에게, 자신을 둘러싼 보이지 않는 관계망을 떠올리는 작은 계기가 되기를 바란다."
+    ]
   }
 }

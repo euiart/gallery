@@ -1,28 +1,9 @@
 {
-  "hidden": true,
-  "artist": {
-    "name": "박정희",
-    "name_en": "Park Jung Hee",
-    "bio": "",
-    "website": ""
-  },
-  "exhibition": {
-    "number": 4,
-    "type": "초대 개인전",
-    "type_en": "Invitational Solo Exhibition",
-    "title": "",
-    "subtitle": "",
-    "venue": "euiart 온라인 갤러리",
-    "period": "2026. 12. 1 – 12. 31",
-    "start": "2026-12-01",
-    "end": "2026-12-31",
-    "statement": []
-  },
   "i18n": {
     "en": {
       "artist": {
-        "name": "Park Jung Hee",
-        "bio": ""
+        "bio": "",
+        "name": "Park Jung Hee"
       },
       "exhibition": {
         "type": "Invitational Solo Exhibition",
@@ -31,8 +12,8 @@
     },
     "ja": {
       "artist": {
-        "name": "박정희",
-        "bio": ""
+        "bio": "",
+        "name": "박정희"
       },
       "exhibition": {
         "type": "招待個展",
@@ -60,6 +41,222 @@
     "wall_bright": 37,
     "floor_bright": 18
   },
-  "works": [],
-  "presets": []
+  "works": [
+    {
+      "id": "w01",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "100×100cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 1",
+      "medium": "Oil on canvas",
+      "title_en": "Work 1",
+      "width_cm": 100,
+      "height_cm": 100,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 31,
+        "style": "fields",
+        "colors": [
+          "#c8553d",
+          "#2d6a8f",
+          "#e8b04a",
+          "#33312c"
+        ]
+      }
+    },
+    {
+      "id": "w02",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "90×120cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 2",
+      "medium": "Oil on canvas",
+      "title_en": "Work 2",
+      "width_cm": 90,
+      "height_cm": 120,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 62,
+        "style": "fields",
+        "colors": [
+          "#e07a5f",
+          "#3d405b",
+          "#81b29a",
+          "#f2cc8f"
+        ]
+      }
+    },
+    {
+      "id": "w03",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "162×130cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 3",
+      "medium": "Oil on canvas",
+      "title_en": "Work 3",
+      "width_cm": 162,
+      "height_cm": 130,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 93,
+        "style": "fields",
+        "colors": [
+          "#264653",
+          "#2a9d8f",
+          "#e9c46a",
+          "#f4a261"
+        ]
+      }
+    },
+    {
+      "id": "w04",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "60×60cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 4",
+      "medium": "Oil on canvas",
+      "title_en": "Work 4",
+      "width_cm": 60,
+      "height_cm": 60,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 124,
+        "style": "fields",
+        "colors": [
+          "#5f0f40",
+          "#9a031e",
+          "#fb8b24",
+          "#0f4c5c"
+        ]
+      }
+    },
+    {
+      "id": "w05",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "72.7×90.9cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 5",
+      "medium": "Oil on canvas",
+      "title_en": "Work 5",
+      "width_cm": 72.7,
+      "height_cm": 90.9,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 155,
+        "style": "fields",
+        "colors": [
+          "#22223b",
+          "#4a4e69",
+          "#9a8c98",
+          "#c9ada7"
+        ]
+      }
+    },
+    {
+      "id": "w06",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "130×162cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 6",
+      "medium": "Oil on canvas",
+      "title_en": "Work 6",
+      "width_cm": 130,
+      "height_cm": 162,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 186,
+        "style": "fields",
+        "colors": [
+          "#606c38",
+          "#283618",
+          "#dda15e",
+          "#bc6c25"
+        ]
+      }
+    },
+    {
+      "id": "w07",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "53×45.5cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 7",
+      "medium": "Oil on canvas",
+      "title_en": "Work 7",
+      "width_cm": 53,
+      "height_cm": 45.5,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 217,
+        "style": "fields",
+        "colors": [
+          "#14213d",
+          "#fca311",
+          "#e5e5e5",
+          "#7d8597"
+        ]
+      }
+    },
+    {
+      "id": "w08",
+      "note": "예시 작품입니다. 편집 모드에서 이미지·제목·크기·설명을 바꾸거나 삭제할 수 있어요.",
+      "size": "116.8×91cm",
+      "year": "2026",
+      "image": "",
+      "title": "작품 8",
+      "medium": "Oil on canvas",
+      "title_en": "Work 8",
+      "width_cm": 116.8,
+      "height_cm": 91,
+      "size_fixed": true,
+      "placeholder": {
+        "bg": "#ece4d4",
+        "seed": 248,
+        "style": "fields",
+        "colors": [
+          "#3a5a40",
+          "#a3b18a",
+          "#dad7cd",
+          "#588157"
+        ]
+      }
+    }
+  ],
+  "artist": {
+    "bio": "작가 소개를 적어 주세요.",
+    "name": "박정희",
+    "name_en": "Park Jung Hee",
+    "website": ""
+  },
+  "hidden": true,
+  "presets": [],
+  "exhibition": {
+    "end": "2026-12-31",
+    "type": "초대 개인전",
+    "start": "2026-12-01",
+    "title": "전시 제목",
+    "venue": "euiart 온라인 갤러리",
+    "number": 4,
+    "period": "2026. 12. 1 – 12. 31",
+    "type_en": "Invitational Solo Exhibition",
+    "subtitle": "",
+    "statement": [
+      "이 전시는 아직 준비 중이에요. 왼쪽 위 제목 카드를 두 번 클릭해 로그인하면, 전시 제목·서문·작가 소개와 작품 이미지·제목·크기·배치·액자·조명·벽과 바닥을 직접 바꾸고 [저장하기]로 저장할 수 있어요.",
+      "여기에 전시 서문을 적어 주세요. 문단을 나누면 화면에서도 문단이 나뉘어 보여요.",
+      "준비가 끝나면 전시 정보 탭의 ‘전시 목록에서 숨기기’ 체크를 풀고 저장하면 전시가 공개돼요. (공개 시점은 euiart 온라인 갤러리와 상의해 주세요)"
+    ]
+  }
 }
