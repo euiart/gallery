@@ -1,10 +1,10 @@
 {
- "version": "v61",
+ "version": "v62",
  "date": "2026-11-28",
  "files": {
-  "assets/help/ko.html": "ce04474d99721928",
-  "assets/help/en.html": "cf0207ea61ee93b8",
-  "assets/help/ja.html": "403f30d1c42a1bf9",
+  "assets/help/ko.html": "8c39076941d521f0",
+  "assets/help/en.html": "ab8a36c1c59e9248",
+  "assets/help/ja.html": "76c0aa68ec9ee00d",
   "assets/euiart-photo-edit.js": "448bfde1ea32fe35"
  }
 }
